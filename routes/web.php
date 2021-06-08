@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,7 +23,11 @@ Auth::routes();
 
 Route::middleware(['isAdmin'])->group(function () {
     Route::prefix('admin')->group(function () {
-        Route::get('/', [HomeController::class, 'admin'])->name('index');
+        Route::get('/', [HomeController::class, 'admin'])->name('admin.index');
+
+        Route::prefix('users')->group(function () {
+            Route::get('/', [UserController::class, 'index'])->name('admin.users.index');
+        });
     });
 });
 
