@@ -102,34 +102,76 @@
         <aside id="sidebar" class="js-custom-scroll side-nav">
             <ul id="sideNav" class="side-nav-menu side-nav-menu-top-level mb-0">
                 <!-- Title -->
-                <li class="sidebar-heading h6">Dashboard</li>
+                <li class="sidebar-heading h6">Home</li>
                 <!-- End Title -->
 
                 <!-- Dashboard -->
                 <li class="side-nav-menu-item active">
                     <a class="side-nav-menu-link media align-items-center" href="/">
                         <span class="side-nav-menu-icon d-flex mr-3">
-                            <i class="gd-dashboard"></i>
+                            <i class="gd-home"></i>
                         </span>
-                        <span class="side-nav-fadeout-on-closed media-body">Dashboard</span>
+                        <span class="side-nav-fadeout-on-closed media-body">Home</span>
                     </a>
                 </li>
                 <!-- End Dashboard -->
 
-                <!-- Documentation -->
-                <li class="side-nav-menu-item">
-                    <a class="side-nav-menu-link media align-items-center" href="documentation/" target="_blank">
+                <!-- Pembelian -->
+                <li class="side-nav-menu-item side-nav-has-menu">
+                    <a class="side-nav-menu-link media align-items-center" href="#" data-target="#subBuying">
                         <span class="side-nav-menu-icon d-flex mr-3">
                             <i class="gd-file"></i>
                         </span>
-                        <span class="side-nav-fadeout-on-closed media-body">Documentation</span>
+                        <span class="side-nav-fadeout-on-closed media-body">Pembelian</span>
+                        <span class="side-nav-control-icon d-flex">
+                            <i class="gd-angle-right side-nav-fadeout-on-closed"></i>
+                        </span>
+                        <span class="side-nav__indicator side-nav-fadeout-on-closed"></span>
                     </a>
-                </li>
-                <!-- End Documentation -->
 
+                    <ul id="subBuying" class="side-nav-menu side-nav-menu-second-level mb-0">
+                        <li class="side-nav-menu-item">
+                            <a class="side-nav-menu-link" href="#">Menunggu Pembayaran</a>
+                        </li>
+                        <li class="side-nav-menu-item">
+                            <a class="side-nav-menu-link" href="#">Daftar Transaksi</a>
+                        </li>
+                    </ul>
+
+                </li>
+                <!-- End Pembelian -->
+
+                {{-- Toko saya --}}
                 <!-- Title -->
                 <li class="sidebar-heading h6">Toko saya</li>
                 <!-- End Title -->
+
+                <!-- Produk -->
+                <li class="side-nav-menu-item side-nav-has-menu">
+                    <a class="side-nav-menu-link media align-items-center" href="#" data-target="#subProduct">
+                        <span class="side-nav-menu-icon d-flex mr-3">
+                            <i class="gd-package"></i>
+                        </span>
+                        <span class="side-nav-fadeout-on-closed media-body">Produk</span>
+                        <span class="side-nav-control-icon d-flex">
+                            <i class="gd-angle-right side-nav-fadeout-on-closed"></i>
+                        </span>
+                        <span class="side-nav__indicator side-nav-fadeout-on-closed"></span>
+                    </a>
+
+                    <ul id="subProduct" class="side-nav-menu side-nav-menu-second-level mb-0">
+                        <li class="side-nav-menu-item">
+                            <a class="side-nav-menu-link" href="#">Tambah Produk</a>
+                        </li>
+                        <li class="side-nav-menu-item">
+                            <a class="side-nav-menu-link" href="#">Daftar Produk</a>
+                        </li>
+                    </ul>
+
+                </li>
+                <!-- End of Produk -->
+
+                {{-- End of Toko saya --}}
 
                 @if (Auth::user()->is_admin == 1)
                 <!-- Title -->
