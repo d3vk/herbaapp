@@ -146,7 +146,21 @@
                 <li class="sidebar-heading h6">Toko saya</li>
                 <!-- End Title -->
 
-                <!-- Produk -->
+                @php
+                    $merchant = App\Models\Merchant::where('admin_id', Auth::user()->id)->first();
+                @endphp
+
+                @if ($merchant == null)
+                <li class="side-nav-menu-item">
+                    <a class="side-nav-menu-link media align-items-center" href="#">
+                        <span class="side-nav-menu-icon d-flex mr-3">
+                            <i class="gd-plus"></i>
+                        </span>
+                        <span class="side-nav-fadeout-on-closed media-body">Buka Toko</span>
+                    </a>
+                </li>
+                @else
+                    <!-- Produk -->
                 <li class="side-nav-menu-item side-nav-has-menu">
                     <a class="side-nav-menu-link media align-items-center" href="#" data-target="#subProduct">
                         <span class="side-nav-menu-icon d-flex mr-3">
@@ -167,9 +181,9 @@
                             <a class="side-nav-menu-link" href="#">Daftar Produk</a>
                         </li>
                     </ul>
-
                 </li>
                 <!-- End of Produk -->
+                @endif
 
                 {{-- End of Toko saya --}}
 

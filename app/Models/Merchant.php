@@ -13,4 +13,9 @@ class Merchant extends Model
         'merchat_name',
         'admin_id'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'admin_id', 'id');
+    }
 }

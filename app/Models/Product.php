@@ -16,4 +16,9 @@ class Product extends Model
         'status',
         'product_description'
     ];
+
+    public function merchant()
+    {
+        return $this->belongsTo(Merchant::class);
+    }
 }

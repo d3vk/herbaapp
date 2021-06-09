@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Models\Merchant;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
