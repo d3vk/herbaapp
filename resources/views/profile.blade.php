@@ -1,11 +1,11 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Ubah Data Pengguna')
+@section('title', 'Profil saya')
 
 @section('content')
     <div class="card" style="width: 500px">
         <div class="card-body pt-5">
-            <form method="POST" action="{{ route('admin.users.update', [$user->id]) }}">
+            <form method="POST" action="{{ route('profile.update') }}">
                 @csrf
                 <div class="form-group">
                     <label for="name">Nama</label>
@@ -29,20 +29,6 @@
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
-                </div>
-
-                <div class="form-group">
-                    <label for="is_admin">Role
-                    </label>
-                    <select name="is_admin" id="is_admin" class="form-control">
-                        @if ($user->is_admin == 1)
-                            <option value="0">User</option>
-                            <option value="1" selected>Administrator</option>
-                        @else
-                            <option value="0" selected>User</option>
-                            <option value="1">Administrator</option>
-                        @endif
-                    </select>
                 </div>
 
                 <div class="form-group no-margin">

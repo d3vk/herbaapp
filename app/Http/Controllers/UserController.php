@@ -75,7 +75,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        return view('admin/users/edit', compact('user'));
+        return view('admin.users.edit', compact('user'));
     }
 
     /**
@@ -87,8 +87,21 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+        ]);
 
-        return redirect()->route('admin.users.index');
+        if ($validated) {
+            User::find($id)->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'is_admin' => $request->is_admin
+            ]);
+            return redirect()->route('admin.users.index')->with('success', 'Data pengguna berhasil diperbarui');
+        } else {
+            return redirect()->route('admin.users.edit', [$id])->with('error', 'Gagal memperbarui data pengguna')->withInput($request->except('password'));
+        }
     }
 
     /**

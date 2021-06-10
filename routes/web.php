@@ -38,4 +38,6 @@ Route::middleware(['isAdmin'])->group(function () {
     });
 });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
+Route::post('/profile', [HomeController::class, 'updateProfile'])->name('profile.update');
