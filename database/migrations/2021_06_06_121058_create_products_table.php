@@ -19,7 +19,8 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('merchant_id');
             $table->unsignedInteger('price');
             $table->enum('status', ['Tersedia', 'Kosong', 'Hampir habis']);
-            $table->text('product_description');
+            $table->string('img');
+            $table->text('description');
             $table->timestamps();
 
             $table->foreign('merchant_id')->references('id')->on('merchants');
