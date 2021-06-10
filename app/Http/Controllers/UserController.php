@@ -25,7 +25,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.users.create');
     }
 
     /**
@@ -36,7 +36,23 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string'],
+        ]);
+
+        if ($validated) {
+            User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+                'is_admin' => $request->is_admin
+            ]);
+            return redirect()->route('admin.users.create')->with('success', 'Pengguna baru berhasil dibuat');
+        } else {
+            return redirect()->route('admin.users.create')->with('error', 'Gagal membuat pengguna baru')->withInput($request->except('password'));
+        }
     }
 
     /**
@@ -58,7 +74,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        return view('admin/users/edit', compact('user'));
     }
 
     /**
@@ -70,7 +87,8 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        return redirect()->route('admin.users.index');
     }
 
     /**
@@ -81,6 +99,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::find($id)->delete();
+        return redirect()->route('admin.users.index')->with('success', 'Pengguna berhasil dihapus');
     }
 }

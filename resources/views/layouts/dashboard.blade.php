@@ -101,23 +101,35 @@
         <!-- Sidebar Nav -->
         <aside id="sidebar" class="js-custom-scroll side-nav">
             <ul id="sideNav" class="side-nav-menu side-nav-menu-top-level mb-0">
-                <!-- Title -->
-                <li class="sidebar-heading h6">Home</li>
-                <!-- End Title -->
 
-                <!-- Dashboard -->
-                <li class="side-nav-menu-item active">
-                    <a class="side-nav-menu-link media align-items-center" href="/">
+                <!-- Home -->
+                <li class="side-nav-menu-item mt-3">
+                    <a class="side-nav-menu-link media align-items-center" href="{{ url('/') }}">
                         <span class="side-nav-menu-icon d-flex mr-3">
                             <i class="gd-home"></i>
                         </span>
-                        <span class="side-nav-fadeout-on-closed media-body">Home</span>
+                        <span class="side-nav-fadeout-on-closed media-body">Beranda</span>
+                    </a>
+                </li>
+                <!-- Home -->
+
+                <!-- Title -->
+                <li class="sidebar-heading h6">Dasbor</li>
+                <!-- End Title -->
+
+                <!-- Dashboard -->
+                <li class="side-nav-menu-item {{ request()->is('home*') ? 'active' : '' }}">
+                    <a class="side-nav-menu-link media align-items-center" href="{{ route('home') }}">
+                        <span class="side-nav-menu-icon d-flex mr-3">
+                            <i class="gd-dashboard"></i>
+                        </span>
+                        <span class="side-nav-fadeout-on-closed media-body">Dasbor</span>
                     </a>
                 </li>
                 <!-- End Dashboard -->
 
                 <!-- Pembelian -->
-                <li class="side-nav-menu-item side-nav-has-menu">
+                <li class="side-nav-menu-item side-nav-has-menu {{ request()->is('order*') ? 'active' : '' }}">
                     <a class="side-nav-menu-link media align-items-center" href="#" data-target="#subBuying">
                         <span class="side-nav-menu-icon d-flex mr-3">
                             <i class="gd-file"></i>
@@ -151,129 +163,75 @@
                 @endphp
 
                 @if ($merchant == null)
-                <li class="side-nav-menu-item">
-                    <a class="side-nav-menu-link media align-items-center" href="#">
-                        <span class="side-nav-menu-icon d-flex mr-3">
-                            <i class="gd-plus"></i>
-                        </span>
-                        <span class="side-nav-fadeout-on-closed media-body">Buka Toko</span>
-                    </a>
-                </li>
+                    <li class="side-nav-menu-item {{ request()->is('create-store*') ? 'active' : '' }}">
+                        <a class="side-nav-menu-link media align-items-center" href="#">
+                            <span class="side-nav-menu-icon d-flex mr-3">
+                                <i class="gd-plus"></i>
+                            </span>
+                            <span class="side-nav-fadeout-on-closed media-body">Buka Toko</span>
+                        </a>
+                    </li>
                 @else
                     <!-- Produk -->
-                <li class="side-nav-menu-item side-nav-has-menu">
-                    <a class="side-nav-menu-link media align-items-center" href="#" data-target="#subProduct">
-                        <span class="side-nav-menu-icon d-flex mr-3">
-                            <i class="gd-package"></i>
-                        </span>
-                        <span class="side-nav-fadeout-on-closed media-body">Produk</span>
-                        <span class="side-nav-control-icon d-flex">
-                            <i class="gd-angle-right side-nav-fadeout-on-closed"></i>
-                        </span>
-                        <span class="side-nav__indicator side-nav-fadeout-on-closed"></span>
-                    </a>
+                    <li class="side-nav-menu-item side-nav-has-menu {{ request()->is('store*') ? 'active' : '' }}">
+                        <a class="side-nav-menu-link media align-items-center" href="#" data-target="#subProduct">
+                            <span class="side-nav-menu-icon d-flex mr-3">
+                                <i class="gd-package"></i>
+                            </span>
+                            <span class="side-nav-fadeout-on-closed media-body">Produk</span>
+                            <span class="side-nav-control-icon d-flex">
+                                <i class="gd-angle-right side-nav-fadeout-on-closed"></i>
+                            </span>
+                            <span class="side-nav__indicator side-nav-fadeout-on-closed"></span>
+                        </a>
 
-                    <ul id="subProduct" class="side-nav-menu side-nav-menu-second-level mb-0">
-                        <li class="side-nav-menu-item">
-                            <a class="side-nav-menu-link" href="#">Tambah Produk</a>
-                        </li>
-                        <li class="side-nav-menu-item">
-                            <a class="side-nav-menu-link" href="#">Daftar Produk</a>
-                        </li>
-                    </ul>
-                </li>
-                <!-- End of Produk -->
+                        <ul id="subProduct" class="side-nav-menu side-nav-menu-second-level mb-0">
+                            <li class="side-nav-menu-item">
+                                <a class="side-nav-menu-link" href="#">Tambah Produk</a>
+                            </li>
+                            <li class="side-nav-menu-item">
+                                <a class="side-nav-menu-link" href="#">Daftar Produk</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- End of Produk -->
                 @endif
 
                 {{-- End of Toko saya --}}
 
                 @if (Auth::user()->is_admin == 1)
-                <!-- Title -->
-                <li class="sidebar-heading h6">Administrator</li>
-                <!-- End Title -->
+                    <!-- Title -->
+                    <li class="sidebar-heading h6">Administrator</li>
+                    <!-- End Title -->
 
-                <!-- Users -->
-                <li class="side-nav-menu-item side-nav-has-menu">
-                    <a class="side-nav-menu-link media align-items-center" href="#" data-target="#subUsers">
-                        <span class="side-nav-menu-icon d-flex mr-3">
-                            <i class="gd-user"></i>
-                        </span>
-                        <span class="side-nav-fadeout-on-closed media-body">Pengguna</span>
-                        <span class="side-nav-control-icon d-flex">
-                            <i class="gd-angle-right side-nav-fadeout-on-closed"></i>
-                        </span>
-                        <span class="side-nav__indicator side-nav-fadeout-on-closed"></span>
-                    </a>
+                    <!-- Users -->
+                    <li
+                        class="side-nav-menu-item side-nav-has-menu {{ request()->is('admin/users*') ? 'active' : '' }}">
+                        <a class="side-nav-menu-link media align-items-center" href="#" data-target="#subUsers">
+                            <span class="side-nav-menu-icon d-flex mr-3">
+                                <i class="gd-user"></i>
+                            </span>
+                            <span class="side-nav-fadeout-on-closed media-body">Pengguna</span>
+                            <span class="side-nav-control-icon d-flex">
+                                <i class="gd-angle-right side-nav-fadeout-on-closed"></i>
+                            </span>
+                            <span class="side-nav__indicator side-nav-fadeout-on-closed"></span>
+                        </a>
 
-                    <!-- Users: subUsers -->
-                    <ul id="subUsers" class="side-nav-menu side-nav-menu-second-level mb-0">
-                        <li class="side-nav-menu-item">
-                            <a class="side-nav-menu-link" href="{{ route('admin.users.index') }}">Lihat pengguna</a>
-                        </li>
-                        <li class="side-nav-menu-item">
-                            <a class="side-nav-menu-link" href="user-edit.html">Tambah pengguna</a>
-                        </li>
-                    </ul>
-                    <!-- End Users: subUsers -->
-                </li>
-                <!-- End Users -->
-
-                <!-- Authentication -->
-                <li class="side-nav-menu-item side-nav-has-menu">
-                    <a class="side-nav-menu-link media align-items-center" href="#" data-target="#subPages">
-                        <span class="side-nav-menu-icon d-flex mr-3">
-                            <i class="gd-lock"></i>
-                        </span>
-                        <span class="side-nav-fadeout-on-closed media-body">Authentication</span>
-                        <span class="side-nav-control-icon d-flex">
-                            <i class="gd-angle-right side-nav-fadeout-on-closed"></i>
-                        </span>
-                        <span class="side-nav__indicator side-nav-fadeout-on-closed"></span>
-                    </a>
-
-                    <!-- Pages: subPages -->
-                    <ul id="subPages" class="side-nav-menu side-nav-menu-second-level mb-0">
-                        <li class="side-nav-menu-item">
-                            <a class="side-nav-menu-link" href="login.html">Login</a>
-                        </li>
-                        <li class="side-nav-menu-item">
-                            <a class="side-nav-menu-link" href="register.html">Register</a>
-                        </li>
-                        <li class="side-nav-menu-item">
-                            <a class="side-nav-menu-link" href="password-reset.html">Forgot Password</a>
-                        </li>
-                        <li class="side-nav-menu-item">
-                            <a class="side-nav-menu-link" href="password-reset-2.html">Forgot Password 2</a>
-                        </li>
-                        <li class="side-nav-menu-item">
-                            <a class="side-nav-menu-link" href="email-verification.html">Email Verification</a>
-                        </li>
-                    </ul>
-                    <!-- End Pages: subPages -->
-                </li>
-                <!-- End Authentication -->
-
-                <!-- Settings -->
-                <li class="side-nav-menu-item">
-                    <a class="side-nav-menu-link media align-items-center" href="settings.html">
-                        <span class="side-nav-menu-icon d-flex mr-3">
-                            <i class="gd-settings"></i>
-                        </span>
-                        <span class="side-nav-fadeout-on-closed media-body">Settings</span>
-                    </a>
-                </li>
-                <!-- End Settings -->
-
-                <!-- Static -->
-                <li class="side-nav-menu-item">
-                    <a class="side-nav-menu-link media align-items-center" href="static-non-auth.html">
-                        <span class="side-nav-menu-icon d-flex mr-3">
-                            <i class="gd-file"></i>
-                        </span>
-                        <span class="side-nav-fadeout-on-closed media-body">Static page</span>
-                    </a>
-                </li>
-                <!-- End Static -->
+                        <!-- Users: subUsers -->
+                        <ul id="subUsers" class="side-nav-menu side-nav-menu-second-level mb-0">
+                            <li class="side-nav-menu-item">
+                                <a class="side-nav-menu-link" href="{{ route('admin.users.index') }}">Lihat
+                                    pengguna</a>
+                            </li>
+                            <li class="side-nav-menu-item">
+                                <a class="side-nav-menu-link" href="{{ route('admin.users.create') }}">Tambah
+                                    pengguna</a>
+                            </li>
+                        </ul>
+                        <!-- End Users: subUsers -->
+                    </li>
+                    <!-- End Users -->
                 @endif
 
             </ul>
@@ -287,7 +245,44 @@
                     <div class="h3 mb-0">@yield('title')</div>
                 </div>
 
+                @if (session('status'))
+                    <div class="alert alert-primary alert-left-bordered border-primary alert-dismissible d-flex align-items-center p-md-4 mb-2 fade show"
+                        role="alert">
+                        <i class="gd-info-alt icon-text text-primary-darker mr-2"></i>
+                        <p class="mb-0">
+                            <strong>status</strong> {{ session('status') }}
+                        </p>
+                        <button type="button" class="close" aria-label="Close" data-dismiss="alert">
+                            <i class="gd-close icon-text icon-text-xs" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                @elseif (session('success'))
+                    <div class="alert alert-success alert-left-bordered border-success alert-dismissible d-flex align-items-center p-md-4 mb-2 fade show"
+                        role="alert">
+                        <i class="gd-check-box icon-text text-success mr-2"></i>
+                        <p class="mb-0">
+                            <strong>Success</strong> {{ session('success') }}
+                        </p>
+                        <button type="button" class="close" aria-label="Close" data-dismiss="alert">
+                            <i class="gd-close icon-text icon-text-xs" aria-hidden="true"></i>
+                        </button>
+                    </div>
+
+                @elseif (session('error'))
+                    <div class="alert alert-danger alert-left-bordered border-danger alert-dismissible d-flex align-items-center p-md-4 mb-2 fade show"
+                        role="alert">
+                        <i class="gd-alert icon-text text-danger mr-2"></i>
+                        <p class="mb-0">
+                            <strong>Error</strong> {{ session('error') }}
+                        </p>
+                        <button type="button" class="close" aria-label="Close" data-dismiss="alert">
+                            <i class="gd-close icon-text icon-text-xs" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                @endif
+
                 @yield('content')
+
             </div>
 
             <!-- Footer -->
@@ -322,8 +317,10 @@
             </footer>
             <!-- End Footer -->
         </div>
+        @yield('modal')
     </main>
 
+    
 
     <script src="{{ asset('js/graindashboard.js') }}"></script>
     <script src="{{ asset('js/graindashboard.vendor.js') }}"></script>

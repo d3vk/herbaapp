@@ -29,6 +29,11 @@ Route::middleware(['isAdmin'])->group(function () {
 
         Route::prefix('users')->group(function () {
             Route::get('/', [UserController::class, 'index'])->name('admin.users.index');
+            Route::get('/create', [UserController::class, 'create'])->name('admin.users.create');
+            Route::post('/create', [UserController::class, 'store'])->name('admin.users.store');
+            Route::get('/edit/{id}', [UserController::class, 'edit'])->name('admin.users.edit');
+            Route::post('/update/{id}', [UserController::class, 'update'])->name('admin.users.update');
+            Route::post('/delete/{id}',[UserController::class, 'destroy'])->name('admin.users.delete');
         });
     });
 });
