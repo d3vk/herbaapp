@@ -164,7 +164,7 @@
 
                 @if ($merchant == null)
                     <li class="side-nav-menu-item {{ request()->is('create-store*') ? 'active' : '' }}">
-                        <a class="side-nav-menu-link media align-items-center" href="#">
+                        <a class="side-nav-menu-link media align-items-center" href="{{ route('create.market') }}">
                             <span class="side-nav-menu-icon d-flex mr-3">
                                 <i class="gd-plus"></i>
                             </span>

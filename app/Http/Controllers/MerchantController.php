@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Merchant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MerchantController extends Controller
 {
@@ -18,7 +20,7 @@ class MerchantController extends Controller
 
     public function create()
     {
-        //
+        return view('merchant.create');
     }
 
     /**
@@ -29,7 +31,21 @@ class MerchantController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255', 'unique:merchants'],
+            'address' => ['required', 'string'],
+        ]);
+
+        if ($validated) {
+            Merchant::create([
+                'name' => $request->name,
+                'address' => $request->address,
+                'admin_id' => Auth::user()->id,
+            ]);
+            return redirect()->route('home')->with('success', 'Selamat! Anda berhasil membuka toko baru');
+        } else {
+            return redirect()->route('home')->with('error', 'Gagal membuka toko')->withInput();
+        }
     }
 
     /**

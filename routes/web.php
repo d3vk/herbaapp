@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MerchantController;
 use App\Http\Controllers\UserController;
 use App\Models\Merchant;
 use App\Models\User;
@@ -41,3 +42,5 @@ Route::middleware(['isAdmin'])->group(function () {
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
 Route::post('/profile', [HomeController::class, 'updateProfile'])->name('profile.update');
+Route::get('/buka-toko', [MerchantController::class, 'create'])->name('create.market');
+Route::post('/buka-toko', [MerchantController::class, 'store'])->name('store.market');
