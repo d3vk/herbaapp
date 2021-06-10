@@ -19,6 +19,7 @@ class CreateMerchantsTable extends Migration
             $table->unsignedBigInteger('admin_id');
             $table->string('logo')->nullable();
             $table->string('address');
+            $table->boolean('is_active')->default(1);
             $table->timestamps();
 
             $table->foreign('admin_id')->references('id')->on('users');

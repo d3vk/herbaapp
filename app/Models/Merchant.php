@@ -13,7 +13,8 @@ class Merchant extends Model
         'name',
         'admin_id',
         'logo',
-        'address'
+        'address',
+        'is_active'
     ];
 
     public function user()

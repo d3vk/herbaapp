@@ -14,7 +14,12 @@ class Product extends Model
         'merchant_id',
         'price',
         'status',
-        'product_description'
+        'short_description',
+        'description',
+        'good_for',
+        'how_to',
+        'ingredients',
+        'is_active'
     ];
 
     public function merchant()

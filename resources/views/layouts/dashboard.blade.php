@@ -232,6 +232,31 @@
                         <!-- End Users: subUsers -->
                     </li>
                     <!-- End Users -->
+
+                    <!-- Merchant -->
+                    <li
+                        class="side-nav-menu-item side-nav-has-menu {{ request()->is('admin/merchant*') ? 'active' : '' }}">
+                        <a class="side-nav-menu-link media align-items-center" href="#" data-target="#subMerchant">
+                            <span class="side-nav-menu-icon d-flex mr-3">
+                                <i class="gd-user"></i>
+                            </span>
+                            <span class="side-nav-fadeout-on-closed media-body">Merchant</span>
+                            <span class="side-nav-control-icon d-flex">
+                                <i class="gd-angle-right side-nav-fadeout-on-closed"></i>
+                            </span>
+                            <span class="side-nav__indicator side-nav-fadeout-on-closed"></span>
+                        </a>
+
+                        <!-- Merchant: subMerchant -->
+                        <ul id="subMerchant" class="side-nav-menu side-nav-menu-second-level mb-0">
+                            <li class="side-nav-menu-item">
+                                <a class="side-nav-menu-link" href="{{ route('admin.users.index') }}">Lihat
+                                    merchant</a>
+                            </li>
+                        </ul>
+                        <!-- End Merchant: subMerchant -->
+                    </li>
+                    <!-- End Merchant -->
                 @endif
 
             </ul>

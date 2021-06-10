@@ -20,7 +20,12 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('price');
             $table->enum('status', ['Tersedia', 'Kosong', 'Hampir habis']);
             $table->string('img');
+            $table->string('short_description');
             $table->text('description');
+            $table->string('good_for');
+            $table->string('how_to');
+            $table->text('ingredients');
+            $table->boolean('is_active');
             $table->timestamps();
 
             $table->foreign('merchant_id')->references('id')->on('merchants');
