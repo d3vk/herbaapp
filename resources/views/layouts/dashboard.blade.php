@@ -188,10 +188,10 @@
 
                         <ul id="subProduct" class="side-nav-menu side-nav-menu-second-level mb-0">
                             <li class="side-nav-menu-item">
-                                <a class="side-nav-menu-link" href="#">Tambah Produk</a>
+                                <a class="side-nav-menu-link" href="{{ route('product.create') }}">Tambah Produk</a>
                             </li>
                             <li class="side-nav-menu-item">
-                                <a class="side-nav-menu-link" href="#">Daftar Produk</a>
+                                <a class="side-nav-menu-link" href="{{ route('product.index') }}">Daftar Produk</a>
                             </li>
                         </ul>
                     </li>

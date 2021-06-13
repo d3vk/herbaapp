@@ -2,9 +2,12 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MerchantController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Models\Merchant;
+use App\Models\Product;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,3 +52,12 @@ Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
 Route::post('/profile', [HomeController::class, 'updateProfile'])->name('profile.update');
 Route::get('/buka-toko', [MerchantController::class, 'create'])->name('create.market');
 Route::post('/buka-toko', [MerchantController::class, 'store'])->name('store.market');
+
+Route::prefix('product')->group(function () {
+    Route::get('/', [ProductController::class, 'index'])->name('product.index');
+    Route::get('/create', [ProductController::class, 'create'])->name('product.create');
+    Route::post('/create', [ProductController::class, 'store'])->name('product.store');
+    Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
+    Route::put('/edit/{id}', [ProductController::class, 'update'])->name('product.update');
+    Route::delete('/delete/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
+});
