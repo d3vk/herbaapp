@@ -33,8 +33,13 @@ Route::middleware(['isAdmin'])->group(function () {
             Route::get('/create', [UserController::class, 'create'])->name('admin.users.create');
             Route::post('/create', [UserController::class, 'store'])->name('admin.users.store');
             Route::get('/edit/{id}', [UserController::class, 'edit'])->name('admin.users.edit');
-            Route::post('/update/{id}', [UserController::class, 'update'])->name('admin.users.update');
-            Route::post('/delete/{id}',[UserController::class, 'destroy'])->name('admin.users.delete');
+            Route::put('/update/{id}', [UserController::class, 'update'])->name('admin.users.update');
+            Route::delete('/delete/{id}',[UserController::class, 'destroy'])->name('admin.users.delete');
+        });
+
+        Route::prefix('merchants')->group(function () {
+            Route::get('/', [MerchantController::class, 'index'])->name('admin.merchant.index');
+            Route::delete('/delete/{id}',[MerchantController::class, 'destroy'])->name('admin.merchant.delete');
         });
     });
 });

@@ -6,6 +6,7 @@
     <div class="card" style="width: 500px">
         <div class="card-body pt-5">
             <form method="POST" action="{{ route('admin.users.update', [$user->id]) }}">
+                @method('put')
                 @csrf
                 <div class="form-group">
                     <label for="name">Nama</label>

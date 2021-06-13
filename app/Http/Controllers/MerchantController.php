@@ -18,6 +18,12 @@ class MerchantController extends Controller
         $this->middleware('auth');
     }
 
+    public function index()
+    {
+        $merchants = Merchant::paginate(10);
+        return view('admin.merchant.index', compact('merchants'));
+    }
+
     public function create()
     {
         return view('merchant.create');
@@ -90,6 +96,7 @@ class MerchantController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Merchant::find($id)->delete();
+        return redirect()->route('admin.merchant.index')->with('success', 'Toko berhasil dihapus');
     }
 }

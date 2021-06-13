@@ -67,6 +67,7 @@
         <div id="delete{{ $user->id }}" class="modal fade" role="dialog"
             aria-labelledby="delete{{ $user->id }}Label" aria-hidden="true">
             <form action="{{ route('admin.users.delete', [$user->id]) }}" method="post">
+                @method('delete')
                 @csrf
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
