@@ -25,6 +25,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/debug', function () {
+    $uid = Merchant::where('admin_id', Auth::user()->id)->pluck('id');
+    $products = Product::where('merchant_id', $uid[0])->get();
+    dd($products);
+});
+
 Auth::routes();
 
 Route::middleware(['isAdmin'])->group(function () {
@@ -37,12 +43,12 @@ Route::middleware(['isAdmin'])->group(function () {
             Route::post('/create', [UserController::class, 'store'])->name('admin.users.store');
             Route::get('/edit/{id}', [UserController::class, 'edit'])->name('admin.users.edit');
             Route::put('/update/{id}', [UserController::class, 'update'])->name('admin.users.update');
-            Route::delete('/delete/{id}',[UserController::class, 'destroy'])->name('admin.users.delete');
+            Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('admin.users.delete');
         });
 
         Route::prefix('merchants')->group(function () {
             Route::get('/', [MerchantController::class, 'index'])->name('admin.merchant.index');
-            Route::delete('/delete/{id}',[MerchantController::class, 'destroy'])->name('admin.merchant.delete');
+            Route::delete('/delete/{id}', [MerchantController::class, 'destroy'])->name('admin.merchant.delete');
         });
     });
 });

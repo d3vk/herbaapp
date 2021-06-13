@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Merchant;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +21,8 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::all();
+        $uid = Merchant::where('admin_id', Auth::user()->id)->pluck('id');
+        $products = Product::where('merchant_id', $uid[0])->paginate(10);
         return view('product.index', compact('products'));
     }
 
@@ -31,30 +33,38 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        $product_name = str_replace(' ', '-', $request->name);
+        $date = date('Ymd');
+        $slug = $date . '-' . $product_name;
+
         $validated = $request->validate([
             'name' => ['required', 'string'],
-            'price' => ['required', 'string'],
+            'price' => ['required'],
             'status' => ['required'],
             'short_description' => ['required', 'string'],
-            'description' => ['required', 'string'],
+            'description' => ['required'],
             'good_for' => ['required', 'string'],
             'how_to' => ['required', 'string'],
             'ingredients' => ['required', 'string'],
         ]);
 
+        $product_name = str_replace(' ', '-', $request->name);
+        $date = date('Ymd');
+        $slug = $date . '-' . $product_name;
+
         if ($validated) {
             Product::create([
                 'name' => $request->name,
                 'merchant_id' => Auth::user()->merchant->id,
+                'slug' => $slug,
                 'price' => $request->price,
                 'status' => $request->status,
-                'short_description' => $request->summary,
+                'short_description' => $request->short_description,
                 'description' => $request->description,
                 'good_for' => $request->good_for,
                 'how_to' => $request->how_to,
                 'ingredients' => $request->ingredients,
             ]);
-
             return redirect()->route('product.index')->with('success', 'Berhasil menambahkan produk baru');
         } else {
             return redirect()->route('product.index')->with('error', 'Gagal menambahkan produk');

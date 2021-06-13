@@ -17,15 +17,15 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('name');
             $table->unsignedBigInteger('merchant_id');
+            $table->string('slug');
             $table->unsignedInteger('price');
             $table->enum('status', ['Tersedia', 'Kosong', 'Hampir habis']);
-            $table->string('img');
             $table->string('short_description');
             $table->text('description');
             $table->string('good_for');
             $table->string('how_to');
             $table->text('ingredients');
-            $table->boolean('is_active');
+            $table->boolean('is_active')->default(1);
             $table->timestamps();
 
             $table->foreign('merchant_id')->references('id')->on('merchants');
