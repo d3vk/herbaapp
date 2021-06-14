@@ -14,6 +14,7 @@ class Order extends Model
         'address',
         'merchant_id',
         'status',
+        'in_cart',
         'payment_method',
     ];
 

@@ -25,6 +25,7 @@ class CreateProductsTable extends Migration
             $table->string('good_for');
             $table->string('how_to');
             $table->text('ingredients');
+            $table->text('images');
             $table->boolean('is_active')->default(1);
             $table->timestamps();
 

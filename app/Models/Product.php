@@ -20,6 +20,7 @@ class Product extends Model
         'good_for',
         'how_to',
         'ingredients',
+        'images',
         'is_active'
     ];
 
@@ -27,4 +28,5 @@ class Product extends Model
     {
         return $this->belongsTo(Merchant::class);
     }
+
 }
