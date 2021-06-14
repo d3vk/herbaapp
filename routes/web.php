@@ -26,9 +26,9 @@ Route::get('/', function () {
 });
 
 Route::get('/debug', function () {
-    $uid = Merchant::where('admin_id', Auth::user()->id)->pluck('id');
-    $products = Product::where('merchant_id', $uid[0])->get();
-    dd($products);
+    $product = Product::find(1);
+    $date = strtotime($product->created_at);
+    dd(date('Ymd',$date));
 });
 
 Auth::routes();
@@ -65,5 +65,5 @@ Route::prefix('product')->group(function () {
     Route::post('/create', [ProductController::class, 'store'])->name('product.store');
     Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
     Route::put('/edit/{id}', [ProductController::class, 'update'])->name('product.update');
-    Route::delete('/delete/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
+    Route::delete('/delete/{id}', [ProductController::class, 'destroy'])->name('product.delete');
 });

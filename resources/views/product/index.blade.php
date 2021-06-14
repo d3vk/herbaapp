@@ -73,3 +73,34 @@
         </div>
     @endif
 @endsection
+
+@section('modal')
+    @foreach ($products as $product)
+        {{-- <button type="button" data-toggle="modal" data-target="#exampleModal">Tes</button> --}}
+
+        <div id="delete{{ $product->id }}" class="modal fade" role="dialog"
+            aria-labelledby="delete{{ $product->id }}Label" aria-hidden="true">
+            <form action="{{ route('product.delete', [$product->id]) }}" method="post">
+                @method('delete')
+                @csrf
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="delete{{ $product->id }}Label">Hapus produk</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Apakah Anda setuju menghapus produk <strong>{{ $product->name }}</strong> ?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-soft-light" data-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-soft-danger">Hapus</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    @endforeach
+@endsection

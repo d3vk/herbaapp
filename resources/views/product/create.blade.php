@@ -57,7 +57,7 @@
             <div class="form-group">
                 <label for="description">Deskripsi Produk</label>
                 <textarea id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description"
-                    value="{{ old('description') }}" required autocomplete="description"></textarea>
+                    value="{{ old('description') }}" required autocomplete="description" rows="4" cols="50"></textarea>
     
                 @error('description')
                     <span class="invalid-feedback" role="alert">

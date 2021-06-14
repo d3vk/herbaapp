@@ -48,10 +48,6 @@ class ProductController extends Controller
             'ingredients' => ['required', 'string'],
         ]);
 
-        $product_name = str_replace(' ', '-', $request->name);
-        $date = date('Ymd');
-        $slug = $date . '-' . $product_name;
-
         if ($validated) {
             Product::create([
                 'name' => $request->name,
@@ -90,22 +86,29 @@ class ProductController extends Controller
             'ingredients' => ['required', 'string'],
         ]);
 
+        $product = Product::find($id);
+        $product_name = str_replace(' ', '-', $request->name);
+        $date_str = strtotime($product->created_at);
+        $date = date('Ymd', $date_str);
+        $slug = $date . '-' . $product_name;
+
         if ($validated) {
             Product::find($id)->update([
                 'name' => $request->name,
                 'merchant_id' => Auth::user()->merchant->id,
+                'slug' => $slug,
                 'price' => $request->price,
                 'status' => $request->status,
-                'short_description' => $request->summary,
+                'short_description' => $request->short_description,
                 'description' => $request->description,
                 'good_for' => $request->good_for,
                 'how_to' => $request->how_to,
                 'ingredients' => $request->ingredients,
             ]);
 
-            return redirect()->route('product.index')->with('success', 'Berhasil menambahkan produk baru');
+            return redirect()->route('product.index')->with('success', 'Berhasil mengubah produk');
         } else {
-            return redirect()->route('product.index')->with('error', 'Gagal menambahkan produk');
+            return redirect()->route('product.index')->with('error', 'Gagal mengubah produk');
         }
     }
 
