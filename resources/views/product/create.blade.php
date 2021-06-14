@@ -57,7 +57,7 @@
             <div class="form-group">
                 <label for="description">Deskripsi Produk</label>
                 <textarea id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description"
-                    value="{{ old('description') }}" required autocomplete="description" rows="4" cols="50"></textarea>
+                    value="{{ old('description') }}" required autocomplete="description" rows="4" cols="50">{{ old('description') }}</textarea>
     
                 @error('description')
                     <span class="invalid-feedback" role="alert">
@@ -96,6 +96,18 @@
                     value="{{ old('ingredients') }}" required autocomplete="ingredients">
     
                 @error('ingredients')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="images[]">Upload gambar produk</label>
+                <input id="images[]" type="file" class="form-control @error('images[]') is-invalid @enderror" name="images[]"
+                accept="image/*" multiple="multiple" required>
+    
+                @error('images[]')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>

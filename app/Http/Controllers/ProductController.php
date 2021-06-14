@@ -46,7 +46,14 @@ class ProductController extends Controller
             'good_for' => ['required', 'string'],
             'how_to' => ['required', 'string'],
             'ingredients' => ['required', 'string'],
+            'images' => ['required'],
         ]);
+
+        foreach ($request->file('images') as $image) {
+            $imageName = $date . '_' . $image->getClientOriginalName();
+            $image->move(public_path('images'), $imageName);
+            $fileNames[] = $imageName;
+        }
 
         if ($validated) {
             Product::create([
@@ -60,6 +67,7 @@ class ProductController extends Controller
                 'good_for' => $request->good_for,
                 'how_to' => $request->how_to,
                 'ingredients' => $request->ingredients,
+                'images' => json_encode($fileNames),
             ]);
             return redirect()->route('product.index')->with('success', 'Berhasil menambahkan produk baru');
         } else {
