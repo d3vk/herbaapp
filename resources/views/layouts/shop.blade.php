@@ -15,18 +15,23 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}">
 
-    <!-- Template -->
-    <link rel="stylesheet" href="{{ asset('css/graindashboard.css') }}">
-
     <!-- Shop -->
     <link rel="stylesheet" href="{{ asset('css/shop.css') }}">
 
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+        }
 
     </style>
+
+    @yield('css')
 </head>
 
 <body>
@@ -39,7 +44,6 @@
         </div>
         <div class="humberger__menu__cart">
             <ul>
-                <li><a href="#"><i class="fas fa-heart"></i> <span>1</span></a></li>
                 <li><a href="#"><i class="fas fa-shopping-bag"></i> <span>3</span></a></li>
             </ul>
 
@@ -84,7 +88,7 @@
                         </div>
                         <ul>
                             <li>Jl. Ir. Sutami No.36, Kentingan<br>Kec. Jebres, Kota Surakarta<br>Jawa Tengah 57126</li>
-                            <li><i class="fas fa-phone"></i> +62 811 1111 1111</li>
+                            <li class="mt-2"><i class="fas fa-phone"></i> +62 811 1111 1111</li>
                         </ul>
                     </div>
                 </div>
@@ -134,7 +138,8 @@
                                 Copyright &copy;
                                 <script>
                                     document.write(new Date().getFullYear());
-                                </script> 
+
+                                </script>
                                 All rights reserved | ObatHerbal
                             </p>
                         </div>
@@ -152,6 +157,12 @@
     <script src="{{ asset('js/mixitup.min.js') }}"></script>
     <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
 </body>
 
 </html>

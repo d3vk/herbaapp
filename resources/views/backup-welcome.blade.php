@@ -1,15 +1,5 @@
 @extends('layouts.shop')
 
-@section('css')
-    <style>
-        a.custom-card,
-        a.custom-card:hover {
-            color: inherit;
-        }
-
-    </style>
-@endsection
-
 @section('content')
     {{-- Header --}}
     <header class="header">
@@ -74,28 +64,32 @@
     {{-- End of Hero section --}}
 
     {{-- Product list --}}
-    <div class="container mb-5">
-        <div class="row featured__filter">
-            @foreach ($products as $product)
-                <div class="col-lg-3 col-md-4 col-sm-6 mt-5">
-                    <a href="#" class="custom-card">
-                        <div class="card border border-success" style="border-radius: 25px;">
+    <section class="featured spad">
+        <div class="container">
+            <div class="row featured__filter">
+                @foreach ($products as $product)
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="featured__item">
                             @php
                                 $decoded_img = json_decode($product->images);
                                 $first_img = $decoded_img[0];
                             @endphp
-                            <img class="card-img-top" src="{{ asset('images/' . $first_img) }}"
-                                alt="{{ $product->name }}"
-                                style="border-top-left-radius: inherit;border-top-right-radius: inherit;">
-                            <div class=" card-body">{{ $product->name }}<br><strong>Rp
-                                    {{ number_format("$product->price", 0, ',', '.') }}</strong></div>
-                            {{-- <div class="card-footer"
-                                    style="border-bottom-left-radius: inherit;border-bottom-right-radius: inherit;"></div> --}}
+                            <div class="featured__item__pic set-bg" data-setbg="{{ asset('images/'.$first_img) }}">
+                                <ul class="featured__item__pic__hover">
+                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="featured__item__text">
+                                <h6><a href="#">{{ $product->name }}</a></h6>
+                                <h5>Rp {{ number_format("$product->price", 0, ',', '.') }}</h5>
+                            </div>
                         </div>
-                    </a>
-                </div>
-            @endforeach
+                    </div>
+                @endforeach
+            </div>
         </div>
-    </div>
+    </section>
     {{-- End of Product list --}}
 @endsection
