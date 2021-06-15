@@ -11,11 +11,20 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}">
 
     <!-- Template -->
     <link rel="stylesheet" href="{{ asset('css/graindashboard.css') }}">
+
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+        }
+    </style>
 
 </head>
 
@@ -63,7 +72,7 @@
                             <span class="d-none d-md-block">{{ Auth::user()->name }}</span>
                             <i class="gd-angle-down d-none d-md-block ml-2"></i>
                         </a>
-
+ 
                         <ul id="profileMenu"
                             class="unfold unfold-user unfold-light unfold-top unfold-centered position-absolute pt-2 pb-1 mt-4 unfold-css-animation unfold-hidden fadeOut"
                             aria-labelledby="profileMenuInvoker" style="animation-duration: 300ms;">
@@ -236,7 +245,8 @@
 
                     <!-- Merchant -->
                     <li class="side-nav-menu-item {{ request()->is('admin/merchant*') ? 'active' : '' }}">
-                        <a class="side-nav-menu-link media align-items-center" href="{{ route('admin.merchant.index') }}">
+                        <a class="side-nav-menu-link media align-items-center"
+                            href="{{ route('admin.merchant.index') }}">
                             <span class="side-nav-menu-icon d-flex mr-3">
                                 <i class="gd-bag"></i>
                             </span>

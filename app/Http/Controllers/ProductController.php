@@ -50,7 +50,8 @@ class ProductController extends Controller
         ]);
 
         foreach ($request->file('images') as $image) {
-            $imageName = $date . '_' . $image->getClientOriginalName();
+            $strippedName = str_replace(' ','_',$image->getClientOriginalName());
+            $imageName = $date . '_' . $strippedName;
             $image->move(public_path('images'), $imageName);
             $fileNames[] = $imageName;
         }
