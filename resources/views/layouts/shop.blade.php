@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>ObatHerbal</title>
+    <title>@yield('title') | ObatHerbal</title>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -35,6 +35,59 @@
 </head>
 
 <body>
+    {{-- Header --}}
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="header__logo">
+                        <a href="{{ url('/') }}"><img src="{{ asset('img/logo.png') }}" alt="logo"
+                                style="width: auto; height: 33px;" class="mt-1"></a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <nav class="header__menu">
+                        <ul>
+                            <li class="active"><a href="index-2.html">Home</a></li>
+                            <li><a href="shop-grid.html">Shop</a></li>
+                            <li><a href="#">Pages</a>
+                                <ul class="header__menu__dropdown">
+                                    <li><a href="shop-details.html">Shop Details</a></li>
+                                    <li><a href="shoping-cart.html">Shoping Cart</a></li>
+                                    <li><a href="checkout.html">Check Out</a></li>
+                                    <li><a href="blog-details.html">Blog Details</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-3">
+                    @if (Route::has('login'))
+                        @auth
+                            <div class="header__cart">
+                                <ul>
+                                    <li><a href="#"><i class="fas fa-shopping-bag"></i> <span>3</span></a></li>
+                                    <li><a href="{{ route('home') }}" class="btn" role="button"><i class="fas fa-user-circle"></i> Akun saya</a></li>
+                                </ul>
+                            </div>
+                        @else
+                        <div class="header__cart">
+                            <a href="{{ route('login') }}" class="btn btn-success" role="button"><i class="fas fa-sign-in"></i> Login</a>
+                        </div>
+                        @endauth
+                    @endif
+
+                </div>
+            </div>
+            <div class="humberger__open">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+    {{-- End of Header --}}
+
     {{-- Mobile Nav --}}
     <div class="humberger__menu__overlay"></div>
     <div class="humberger__menu__wrapper">

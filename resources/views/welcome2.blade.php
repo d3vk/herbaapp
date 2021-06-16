@@ -1,5 +1,7 @@
 @extends('layouts.shop')
 
+@section('title', 'Home')
+
 @section('css')
     <style>
         a.custom-card,
@@ -11,50 +13,6 @@
 @endsection
 
 @section('content')
-    {{-- Header --}}
-    <header class="header">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="header__logo">
-                        <a href="{{ url('/') }}"><img src="{{ asset('img/logo.png') }}" alt="logo"
-                                style="width: auto; height: 33px;" class="mt-1"></a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <nav class="header__menu">
-                        <ul>
-                            <li class="active"><a href="index-2.html">Home</a></li>
-                            <li><a href="shop-grid.html">Shop</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="header__menu__dropdown">
-                                    <li><a href="shop-details.html">Shop Details</a></li>
-                                    <li><a href="shoping-cart.html">Shoping Cart</a></li>
-                                    <li><a href="checkout.html">Check Out</a></li>
-                                    <li><a href="blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="blog.html">Blog</a></li>
-                            <li><a href="contact.html">Contact</a></li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="col-lg-3">
-                    <div class="header__cart">
-                        <ul>
-                            <li><a href="#"><i class="fas fa-shopping-bag"></i> <span>3</span></a></li>
-                        </ul>
-                        <div class="header__cart__price">item: <span>$150.00</span></div>
-                    </div>
-                </div>
-            </div>
-            <div class="humberger__open">
-                <i class="fas fa-bars"></i>
-            </div>
-        </div>
-    </header>
-    {{-- End of Header --}}
-
     {{-- Hero section --}}
     <section class="hero">
         <div class="container">
@@ -78,7 +36,7 @@
         <div class="row featured__filter">
             @foreach ($products as $product)
                 <div class="col-lg-3 col-md-4 col-sm-6 mt-5">
-                    <a href="#" class="custom-card">
+                    <a href="{{ route('product.detail',[$product->slug]) }}" class="custom-card">
                         <div class="card border border-success" style="border-radius: 25px;">
                             @php
                                 $decoded_img = json_decode($product->images);

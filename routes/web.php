@@ -26,6 +26,12 @@ Route::get('/', function () {
     return view('welcome2', compact('products'));
 });
 
+Route::get('/produk/{slug}', function($slug) {
+    $product = Product::where('slug', $slug)->first();
+    return view('detail', compact('product'));
+})->name('product.detail');
+
+
 Route::get('/debug', function () {
     $product = Product::find(1);
     $date = strtotime($product->created_at);
