@@ -28,7 +28,8 @@ Route::get('/', function () {
 
 Route::get('/produk/{slug}', function($slug) {
     $product = Product::where('slug', $slug)->first();
-    return view('detail', compact('product'));
+    $img = json_decode($product->images);
+    return view('detail', compact('product','img'));
 })->name('product.detail');
 
 

@@ -140,7 +140,7 @@
                                     style="width: auto; height: 33px;" class="mt-1"></a>
                         </div>
                         <ul>
-                            <li>Jl. Ir. Sutami No.36, Kentingan<br>Kec. Jebres, Kota Surakarta<br>Jawa Tengah 57126</li>
+                            <li style="line-height: 1.5rem;">Jl. Ir. Sutami No.36, Kentingan<br>Kec. Jebres, Kota Surakarta<br>Jawa Tengah 57126</li>
                             <li class="mt-2"><i class="fas fa-phone"></i> +62 811 1111 1111</li>
                         </ul>
                     </div>
@@ -216,6 +216,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
+    @yield('js')
 </body>
 
 </html>
