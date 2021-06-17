@@ -46,6 +46,18 @@
                                 </span>
                             @enderror
                         </div>
+
+                        <div class="form-group">
+                            <label for="phone">Nomor WhatsApp</label>
+                            <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone"
+                                value="{{ old('phone') }}" required autocomplete="phone" autofocus placeholder="081xxxxxx">
+                                
+                            @error('phone')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-soft-success btn-block">Buka Toko</button>

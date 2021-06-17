@@ -40,12 +40,14 @@ class MerchantController extends Controller
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255', 'unique:merchants'],
             'address' => ['required', 'string'],
+            'phone' => ['required', 'string'],
         ]);
 
         if ($validated) {
             Merchant::create([
                 'name' => $request->name,
                 'address' => $request->address,
+                'phone' => $request->phone,
                 'admin_id' => Auth::user()->id,
             ]);
             return redirect()->route('home')->with('success', 'Selamat! Anda berhasil membuka toko baru');

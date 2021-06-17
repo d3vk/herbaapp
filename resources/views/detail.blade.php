@@ -64,6 +64,7 @@
                 width: 44px;
                 height: 44px;
             }
+
             .product-detail {
                 margin-top: 2rem;
             }
@@ -107,11 +108,17 @@
                 <div class="form-group pt-3 pb-3">
                     <label for="quantity">Jumlah</label>
                     <div class="row">
-                        <div class="col-4">
-                            <input id="quantity" type="number" class="form-control" name="quantity"
-                            value="1" required autocomplete="quantity">
-                        </div>
-                        <div class="col-4"><a href="#" role="button" class="btn btn-success"><i class="fas fa-plus"></i> Keranjang</a></div>
+                        <form action="{{ route('addToCart') }}" method="post" class="d-flex flex-row">
+                            @csrf
+                            <div class="col-4">
+                                <input id="product_id" type="text" class="form-control" name="product_id"
+                                    value="{{ $product->id }}" required hidden>
+                                <input id="quantity" type="number" class="form-control" name="quantity" value="1" required
+                                    autocomplete="quantity">
+                            </div>
+                            <div class="col-8"><button type="submit" class="btn btn-success"><i class="fas fa-plus"></i>
+                                    Keranjang</button></div>
+                        </form>
                     </div>
                 </div>
                 <div class="card">
@@ -154,6 +161,18 @@
                                 <p class="card-text text-justify">{{ $product->ingredients }}</p>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <img class="rounded-circle"
+                            src="https://ui-avatars.com/api/?name={{ $product->merchant->name }}&color=8BC34A&background=F0F4C3"
+                            alt="{{ $product->merchant->name }}">
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 align-items-center" style="margin-top: .2rem;">
+                        <h4>{{ $product->merchant->name }}</h4>
+                        <h6>{{ $product->merchant->address }}</h6>
                     </div>
                 </div>
             </div>

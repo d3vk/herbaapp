@@ -15,11 +15,11 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->string('invoice');
             $table->unsignedBigInteger('user_id');
             $table->text('address');
             $table->unsignedBigInteger('merchant_id');
             $table->enum('status', ['Pesanan dilanjutkan ke penjual', 'Sedang diproses', 'Sedang dikirim', 'Selesai'])->nullable();
-            $table->boolean('in_cart')->default(1);
             $table->unsignedBigInteger('payment_method');
             $table->timestamps();
 

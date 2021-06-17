@@ -68,7 +68,14 @@
                         @auth
                             <div class="header__cart">
                                 <ul>
-                                    <li><a href="#"><i class="fas fa-shopping-bag"></i> <span>3</span></a></li>
+                                    @php
+                                        $item = \App\Models\OrderItem::where('user_id', Auth::user()->id)->where('is_in_cart',1)->pluck('quantity');
+                                        $total = 0;
+                                        for ($i=0; $i < $item->count(); $i++) { 
+                                            $total += $item[$i];
+                                        }
+                                    @endphp
+                                    <li><a href="{{ route('cart') }}"><i class="fas fa-shopping-cart"></i> <span>{{ $total }}</span></a></li>
                                     <li><a href="{{ route('home') }}" class="btn" role="button"><i class="fas fa-user-circle"></i> Akun saya</a></li>
                                 </ul>
                             </div>

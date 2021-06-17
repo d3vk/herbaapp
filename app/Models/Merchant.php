@@ -14,6 +14,7 @@ class Merchant extends Model
         'admin_id',
         'logo',
         'address',
+        'phone',
         'is_active'
     ];
 

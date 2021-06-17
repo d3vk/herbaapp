@@ -2,11 +2,15 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MerchantController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderItemController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Models\Merchant;
+use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\User;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -24,7 +28,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     $products = Product::all();
     return view('welcome2', compact('products'));
-});
+})->name('marketplace');
 
 Route::get('/produk/{slug}', function($slug) {
     $product = Product::where('slug', $slug)->first();
@@ -33,10 +37,9 @@ Route::get('/produk/{slug}', function($slug) {
 })->name('product.detail');
 
 
-Route::get('/debug', function () {
-    $product = Product::find(1);
-    $date = strtotime($product->created_at);
-    dd(date('Ymd',$date));
+Route::post('/debug', function () {
+    $carts = OrderItem::first();
+    dd($carts->product[0]->images[0]);
 });
 
 Auth::routes();
@@ -66,6 +69,10 @@ Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
 Route::post('/profile', [HomeController::class, 'updateProfile'])->name('profile.update');
 Route::get('/buka-toko', [MerchantController::class, 'create'])->name('create.market');
 Route::post('/buka-toko', [MerchantController::class, 'store'])->name('store.market');
+
+Route::post('/add-to-cart', [OrderItemController::class, 'store'])->name('addToCart');
+Route::get('/cart', [OrderItemController::class, 'index'])->name('cart');
+Route::post('/checkout', [OrderController::class, 'store'])->name('checkout');
 
 Route::prefix('product')->group(function () {
     Route::get('/', [ProductController::class, 'index'])->name('product.index');

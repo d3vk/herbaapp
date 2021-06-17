@@ -138,11 +138,22 @@
                 </li>
                 <!-- End Dashboard -->
 
+                <!-- Cart -->
+                <li class="side-nav-menu-item {{ request()->is('cart*') ? 'active' : '' }}">
+                    <a class="side-nav-menu-link media align-items-center" href="{{ route('cart') }}">
+                        <span class="side-nav-menu-icon d-flex mr-3">
+                            <i class="gd-shopping-cart"></i>
+                        </span>
+                        <span class="side-nav-fadeout-on-closed media-body">Keranjang</span>
+                    </a>
+                </li>
+                <!-- End Cart -->
+
                 <!-- Pembelian -->
                 <li class="side-nav-menu-item side-nav-has-menu {{ request()->is('order*') ? 'active' : '' }}">
                     <a class="side-nav-menu-link media align-items-center" href="#" data-target="#subBuying">
                         <span class="side-nav-menu-icon d-flex mr-3">
-                            <i class="gd-shopping-cart"></i>
+                            <i class="gd-receipt"></i>
                         </span>
                         <span class="side-nav-fadeout-on-closed media-body">Pembelian</span>
                         <span class="side-nav-control-icon d-flex">

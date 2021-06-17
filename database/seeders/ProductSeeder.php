@@ -26,7 +26,7 @@ class ProductSeeder extends Seeder
                 'good_for' => 'Gula Darah, Kesehatan Peredaran Darah',
                 'how_to' => 'Konsumsi 1 kapsul 2 kali sehari',
                 'ingredients' => 'Kayu Manis',
-                'images' => '["20210614_Kayu Manis 1.jpg","20210614_Kayu Manis 2.jpg","20210614_Kayu Manis 3.jpg"]',
+                'images' => '["20210614_Kayu_Manis_1.jpg","20210614_Kayu_Manis_2.jpg","20210614_Kayu_Manis_3.jpg"]',
             ],
             [
                 'name' => 'Temulawak Ajaib',
@@ -39,7 +39,7 @@ class ProductSeeder extends Seeder
                 'good_for' => 'Perlindungan Liver, Pereda Nyeri Otot',
                 'how_to' => 'Konsumsi 1 kapsul 3 kali sehari',
                 'ingredients' => 'Temulawak',
-                'images' => '["20210614_Temulawak 1.jpg"]',
+                'images' => '["20210614_Temulawak_1.jpg"]',
             ],
             [
                 'name' => 'Kulit Manggis Ajaib',
@@ -52,7 +52,7 @@ class ProductSeeder extends Seeder
                 'good_for' => 'Daya Tahan Tubuh, Perawatan Kulit',
                 'how_to' => 'Konsumsi 2 kapsul 2 kali sehari',
                 'ingredients' => 'Kulit Manggis',
-                'images' => '["20210614_Kulit Manggis 1.jpg","20210614_Kulit Manggis 2.jpg"]',
+                'images' => '["20210614_Kulit_Manggis_1.jpg","20210614_Kulit_Manggis_2.jpg"]',
             ],
             [
                 'name' => 'Jinten Hitam',
@@ -65,7 +65,7 @@ class ProductSeeder extends Seeder
                 'good_for' => 'Daya Tahan Tubuh',
                 'how_to' => 'Konsumsi 2 kapsul 2 kali sehari',
                 'ingredients' => 'Jinten Hitam',
-                'images' => '["20210614_Jinten Hitam 1.jpg","20210614_Jinten Hitam 2.jpg"]',
+                'images' => '["20210614_Jinten_Hitam_1.jpg","20210614_Jinten_Hitam_2.jpg"]',
             ],
             [
                 'name' => 'Jahe Merah',
@@ -78,7 +78,7 @@ class ProductSeeder extends Seeder
                 'good_for' => 'Gangguan Pencernaan, Sakit Otot, Demam, Masuk Angin, Sakit Tenggorokan',
                 'how_to' => 'Konsumsi 1 kapsul 3 kali sehari',
                 'ingredients' => 'Jahe Merah',
-                'images' => '["20210614_Jahe Merah 1.jpg","20210614_Jahe Merah 2.jpg"]',
+                'images' => '["20210614_Jahe_Merah_1.jpg","20210614_Jahe_Merah_2.jpg"]',
             ],
         ];
 
