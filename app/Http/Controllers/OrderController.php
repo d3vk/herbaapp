@@ -18,7 +18,7 @@ class OrderController extends Controller
         $this->middleware('auth');
     }
 
-    public function store(Request $request)
+    public function storeStepOne(Request $request)
     {
         dd($request->order_item);
     }

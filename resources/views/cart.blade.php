@@ -5,7 +5,8 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <form action="{{ route('checkout') }}" method="post" style="width: -webkit-fill-available; display: contents;">
+            <form action="{{ route('checkout') }}" method="post"
+                style="width: -webkit-fill-available; display: contents;">
                 @csrf
                 @foreach ($carts as $cart)
                     <div class="col-lg-8 col-md-8 col-sm-8">
@@ -16,13 +17,13 @@
                                 $decodedImg = json_decode($cart->product[0]->images);
                                 $firstImg = $decodedImg[0];
                             @endphp
-                            <img class="ml-2" src="{{ asset('images/' . $firstImg) }}" alt="{{ $cart->product[0]->name }}"
-                                for="product"
+                            <img class="ml-2" src="{{ asset('images/' . $firstImg) }}"
+                                alt="{{ $cart->product[0]->name }}" for="product"
                                 style="height: 7rem; width: 7rem; border-radius: 2rem; object-fit: cover; border: .2rem solid #8BC34A">
                             <label class="form-check-label ml-3" for="product" style="position: absolute;">
                                 <h5>{{ $cart->product[0]->name }}</h5>
                                 <h6><strong>Rp {{ number_format($cart->product[0]->price, 0, ',', '.') }}</strong></h6>
-                                <h6>Qty: {{$cart->quantity}}</h6>
+                                <h6>Qty: {{ $cart->quantity }}</h6>
                                 @php
                                     $totalPerProduct = $cart->quantity * $cart->product[0]->price;
                                 @endphp
@@ -32,15 +33,15 @@
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 align-items-center">
                         <a class="link-dark d-inline-block btn btn-soft-light" data-toggle="modal"
-                                    data-target="#delete{{ $cart->id }}">
-                                    <i class="gd-trash icon-text"></i>
-                                    Hapus
-                                </a>
+                            data-target="#delete{{ $cart->id }}">
+                            <i class="gd-trash icon-text"></i>
+                            Hapus
+                        </a>
                     </div>
                 @endforeach
                 <hr>
                 <div class="mt-2 justify-content-between">
-                        <h6>Total<br><strong>Rp {{ number_format($totalPrice, 0, ',', '.') }}</strong></h6>
+                    <h6>Total<br><strong>Rp {{ number_format($totalPrice, 0, ',', '.') }}</strong></h6>
                     <button type="submit" class="btn btn-success">Checkout</button>
                 </div>
             </form>
@@ -65,7 +66,8 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            Apakah Anda setuju menghapus <strong>{{ $cart->product[0]->name }}</strong> dari keranjang belanja Anda?
+                            Apakah Anda setuju menghapus <strong>{{ $cart->product[0]->name }}</strong> dari keranjang
+                            belanja Anda?
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-soft-light" data-dismiss="modal">Tutup</button>

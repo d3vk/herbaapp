@@ -22,4 +22,9 @@ class Merchant extends Model
     {
         return $this->belongsTo(User::class, 'admin_id', 'id');
     }
+
+    public function paymentMethod()
+    {
+        return $this->hasMany(MerchantPayment::class, 'merchant_id', 'id');
+    }
 }

@@ -2,12 +2,14 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MerchantController;
+use App\Http\Controllers\MerchantPaymentController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderItemController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Models\Merchant;
+use App\Models\MerchantPayment;
 use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\User;
@@ -39,13 +41,8 @@ Route::get('/produk/{slug}', function($slug) {
 
 
 Route::get('/debug', function () {
-    $availableBefore = OrderItem::where('product_id', 4)->where('is_in_cart', 1)->where('user_id', 1)->first();
-    if ($availableBefore !== null) {
-        $availableBefore->update([
-            'quantity' => $availableBefore->quantity + 5,
-        ]);
-    }
-    dd($availableBefore);
+    $paymentMethod = MerchantPayment::first();
+    dd($paymentMethod->method);
 });
 
 Auth::routes();
@@ -70,6 +67,11 @@ Route::middleware(['isAdmin'])->group(function () {
 
         Route::prefix('payment')->group(function () {
             Route::get('/', [PaymentController::class, 'index'])->name('admin.payment.index');
+            Route::get('/create', [PaymentController::class, 'create'])->name('admin.payment.create');
+            Route::post('/store', [PaymentController::class, 'store'])->name('admin.payment.store');
+            Route::get('/edit/{id}', [PaymentController::class, 'edit'])->name('admin.payment.edit');
+            Route::put('/update/{id}', [PaymentController::class, 'update'])->name('admin.payment.update');
+            Route::delete('/delete/{id}', [PaymentController::class, 'destroy'])->name('admin.payment.delete');
         });
     });
 });
@@ -84,6 +86,8 @@ Route::post('/add-to-cart', [OrderItemController::class, 'store'])->name('addToC
 Route::delete('/delete-item/{id}', [OrderItemController::class, 'destroy'])->name('deleteFromCart');
 Route::get('/cart', [OrderItemController::class, 'index'])->name('cart');
 Route::post('/checkout', [OrderController::class, 'store'])->name('checkout');
+Route::get('/choose-payment', [OrderItemController::class, 'choosePayment'])->name('choosePayment');
+
 
 Route::prefix('product')->group(function () {
     Route::get('/', [ProductController::class, 'index'])->name('product.index');
@@ -92,4 +96,12 @@ Route::prefix('product')->group(function () {
     Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
     Route::put('/edit/{id}', [ProductController::class, 'update'])->name('product.update');
     Route::delete('/delete/{id}', [ProductController::class, 'destroy'])->name('product.delete');
+});
+
+Route::prefix('payment')->group(function () {
+    Route::get('/', [MerchantPaymentController::class, 'index'])->name('payment.index');
+    Route::post('/create', [MerchantPaymentController::class, 'store'])->name('payment.store');
+    Route::get('/edit/{id}', [MerchantPaymentController::class, 'edit'])->name('payment.edit');
+    Route::put('/edit/{id}', [MerchantPaymentController::class, 'update'])->name('payment.update');
+    Route::delete('/delete/{id}', [MerchantPaymentController::class, 'destroy'])->name('payment.delete');
 });

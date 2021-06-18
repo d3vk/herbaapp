@@ -24,6 +24,7 @@
         body {
             font-family: 'Nunito', sans-serif;
         }
+
     </style>
 
 </head>
@@ -72,7 +73,7 @@
                             <span class="d-none d-md-block">{{ Auth::user()->name }}</span>
                             <i class="gd-angle-down d-none d-md-block ml-2"></i>
                         </a>
- 
+
                         <ul id="profileMenu"
                             class="unfold unfold-user unfold-light unfold-top unfold-centered position-absolute pt-2 pb-1 mt-4 unfold-css-animation unfold-hidden fadeOut"
                             aria-labelledby="profileMenuInvoker" style="animation-duration: 300ms;">
@@ -216,6 +217,19 @@
                         </ul>
                     </li>
                     <!-- End of Produk -->
+
+                    <!-- Payment Method -->
+                    <li class="side-nav-menu-item {{ request()->is('payment/*') ? 'active' : '' }}">
+                        <a class="side-nav-menu-link media align-items-center"
+                            href="{{ route('payment.index') }}">
+                            <span class="side-nav-menu-icon d-flex mr-3">
+                                <i class="gd-money"></i>
+                            </span>
+                            <span class="side-nav-fadeout-on-closed media-body">Pembayaran</span>
+                        </a>
+                    </li>
+                    </li>
+                    <!-- End Payment Method -->
                 @endif
 
                 {{-- End of Toko saya --}}
@@ -266,17 +280,34 @@
                     </li>
                     <!-- End Merchant -->
 
-                    <!-- Payment -->
-                    <li class="side-nav-menu-item {{ request()->is('admin/payment*') ? 'active' : '' }}">
-                        <a class="side-nav-menu-link media align-items-center"
-                            href="{{ route('admin.payment.index') }}">
+                    <!-- Payment Method -->
+                    <li
+                        class="side-nav-menu-item side-nav-has-menu {{ request()->is('admin/payment*') ? 'active' : '' }}">
+                        <a class="side-nav-menu-link media align-items-center" href="#" data-target="#subPayMethod">
                             <span class="side-nav-menu-icon d-flex mr-3">
                                 <i class="gd-money"></i>
                             </span>
                             <span class="side-nav-fadeout-on-closed media-body">Pembayaran</span>
+                            <span class="side-nav-control-icon d-flex">
+                                <i class="gd-angle-right side-nav-fadeout-on-closed"></i>
+                            </span>
+                            <span class="side-nav__indicator side-nav-fadeout-on-closed"></span>
                         </a>
+
+                        <!-- Payment Method: sub -->
+                        <ul id="subPayMethod" class="side-nav-menu side-nav-menu-second-level mb-0">
+                            <li class="side-nav-menu-item">
+                                <a class="side-nav-menu-link" href="{{ route('admin.payment.index') }}">Lihat
+                                    Metode</a>
+                            </li>
+                            <li class="side-nav-menu-item">
+                                <a class="side-nav-menu-link" href="{{ route('admin.payment.create') }}">Tambah
+                                    Metode</a>
+                            </li>
+                        </ul>
+                        <!-- End Payment Method: sub -->
                     </li>
-                    <!-- End Payment -->
+                    <!-- End Payment Method -->
                 @endif
 
             </ul>

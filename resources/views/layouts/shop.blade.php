@@ -76,7 +76,7 @@
                                         }
                                     @endphp
                                     <li><a href="{{ route('cart') }}"><i class="fas fa-shopping-cart"></i> <span>{{ $total }}</span></a></li>
-                                    <li><a href="{{ route('home') }}" class="btn" role="button"><i class="fas fa-user-circle"></i> Akun saya</a></li>
+                                    <li><a href="{{ route('home') }}" class="btn btn-light"><i class="fas fa-user-circle"></i> Akun saya</a></li>
                                 </ul>
                             </div>
                         @else
