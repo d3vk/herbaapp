@@ -265,6 +265,18 @@
                         </a>
                     </li>
                     <!-- End Merchant -->
+
+                    <!-- Payment -->
+                    <li class="side-nav-menu-item {{ request()->is('admin/payment*') ? 'active' : '' }}">
+                        <a class="side-nav-menu-link media align-items-center"
+                            href="{{ route('admin.payment.index') }}">
+                            <span class="side-nav-menu-icon d-flex mr-3">
+                                <i class="gd-money"></i>
+                            </span>
+                            <span class="side-nav-fadeout-on-closed media-body">Pembayaran</span>
+                        </a>
+                    </li>
+                    <!-- End Payment -->
                 @endif
 
             </ul>

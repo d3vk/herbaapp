@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MerchantController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderItemController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Models\Merchant;
@@ -37,9 +38,14 @@ Route::get('/produk/{slug}', function($slug) {
 })->name('product.detail');
 
 
-Route::post('/debug', function () {
-    $carts = OrderItem::first();
-    dd($carts->product[0]->images[0]);
+Route::get('/debug', function () {
+    $availableBefore = OrderItem::where('product_id', 4)->where('is_in_cart', 1)->where('user_id', 1)->first();
+    if ($availableBefore !== null) {
+        $availableBefore->update([
+            'quantity' => $availableBefore->quantity + 5,
+        ]);
+    }
+    dd($availableBefore);
 });
 
 Auth::routes();
@@ -61,6 +67,10 @@ Route::middleware(['isAdmin'])->group(function () {
             Route::get('/', [MerchantController::class, 'index'])->name('admin.merchant.index');
             Route::delete('/delete/{id}', [MerchantController::class, 'destroy'])->name('admin.merchant.delete');
         });
+
+        Route::prefix('payment')->group(function () {
+            Route::get('/', [PaymentController::class, 'index'])->name('admin.payment.index');
+        });
     });
 });
 
@@ -71,6 +81,7 @@ Route::get('/buka-toko', [MerchantController::class, 'create'])->name('create.ma
 Route::post('/buka-toko', [MerchantController::class, 'store'])->name('store.market');
 
 Route::post('/add-to-cart', [OrderItemController::class, 'store'])->name('addToCart');
+Route::delete('/delete-item/{id}', [OrderItemController::class, 'destroy'])->name('deleteFromCart');
 Route::get('/cart', [OrderItemController::class, 'index'])->name('cart');
 Route::post('/checkout', [OrderController::class, 'store'])->name('checkout');
 
