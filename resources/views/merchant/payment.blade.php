@@ -45,6 +45,7 @@
                 <tr>
                     <th class="font-weight-semi-bold border-top-0 py-2">#</th>
                     <th class="font-weight-semi-bold border-top-0 py-2">Metode Pembayaran</th>
+                    <th class="font-weight-semi-bold border-top-0 py-2">Rekening</th>
                     <th class="font-weight-semi-bold border-top-0 py-2">Ditambahkan pada</th>
                     <th class="font-weight-semi-bold border-top-0 py-2">Actions</th>
                 </tr>
@@ -67,6 +68,7 @@
                                 {{ $availableMethod->method->payment_name }}
                             </div>
                         </td>
+                        <td class="py-3">{{ $availableMethod->account }}</td>
                         <td class="py-3">{{ $method->created_at }}</td>
                         <td class="py-3">
                             <div class="position-relative">

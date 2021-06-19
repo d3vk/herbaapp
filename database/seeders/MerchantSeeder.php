@@ -21,6 +21,12 @@ class MerchantSeeder extends Seeder
                 'address' => 'Jl. Ir. Sutami 36A Surakarta',
                 'phone' => '081111111111',
             ],
+            [
+                'name' => 'Toko Pak Langgeng',
+                'admin_id' => 2,
+                'address' => 'Jl. Ir. Sutami 38A Surakarta',
+                'phone' => '082222222222',
+            ],
         ];
 
         foreach ($merchants as $key => $value) {

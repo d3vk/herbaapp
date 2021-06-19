@@ -33,16 +33,23 @@ Route::get('/', function () {
     return view('welcome2', compact('products'));
 })->name('marketplace');
 
-Route::get('/produk/{slug}', function($slug) {
+Route::get('/produk/{slug}', function ($slug) {
     $product = Product::where('slug', $slug)->first();
     $img = json_decode($product->images);
-    return view('detail', compact('product','img'));
+    return view('detail', compact('product', 'img'));
 })->name('product.detail');
 
 
 Route::get('/debug', function () {
-    $paymentMethod = MerchantPayment::first();
-    dd($paymentMethod->method);
+    // $data['orders'] = OrderItem::findMany([1,2,3,6]);
+    // $data['merchant'] = $data['orders']->unique('merchant_id')->pluck('merchant_id');
+    // $data['merchant_1'] = $data['orders']->where('merchant_id', $data['merchant'][0]);
+    // dd($data);
+    $cart = OrderItem::first();
+    $cart->update([
+        'order_invoice' => '123123123',
+    ]);
+    dd($cart);
 });
 
 Auth::routes();

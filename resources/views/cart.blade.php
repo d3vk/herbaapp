@@ -4,10 +4,10 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
-            <form action="{{ route('checkout') }}" method="post"
-                style="width: -webkit-fill-available; display: contents;">
-                @csrf
+        <form action="{{ route('checkout') }}" method="post" style="display: contents;">
+            @csrf
+            <div class="row">
+
                 @foreach ($carts as $cart)
                     <div class="col-lg-8 col-md-8 col-sm-8">
                         <div class="form-check align-items-center mb-5">
@@ -39,13 +39,16 @@
                         </a>
                     </div>
                 @endforeach
-                <hr>
-                <div class="mt-2 justify-content-between">
-                    <h6>Total<br><strong>Rp {{ number_format($totalPrice, 0, ',', '.') }}</strong></h6>
-                    <button type="submit" class="btn btn-success">Checkout</button>
-                </div>
-            </form>
-        </div>
+            </div>
+            <div class="form-group mt-2" style="max-width: 20rem;">
+                <label for="address">Alamat pengiriman</label>
+                <textarea class="form-control" name="address" id="address" required rows="5"></textarea>
+            </div>
+            <div class="mt-2 justify-content-between">
+                <h6>Total<br><strong>Rp {{ number_format($totalPrice, 0, ',', '.') }}</strong></h6>
+                <button type="submit" class="btn btn-success">Checkout</button>
+            </div>
+        </form>
     </div>
 @endsection
 

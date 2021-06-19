@@ -17,13 +17,13 @@ class CreateOrderItemsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('merchant_id');
             $table->unsignedInteger('quantity');
-            $table->unsignedBigInteger('order_id')->nullable();
+            $table->string('order_invoice')->nullable();
             $table->boolean('is_in_cart')->default(1);
 
             $table->timestamps();
 
-            $table->foreign('order_id')->references('id')->on('orders');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('product_id')->references('id')->on('products');
         });

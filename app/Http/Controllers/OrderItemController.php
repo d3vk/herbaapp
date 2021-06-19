@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MerchantPayment;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,7 +29,8 @@ class OrderItemController extends Controller
         for ($i = 0; $i < $carts->count(); $i++) {
             $totalPrice += $carts[$i]->quantity * $carts[$i]->product[0]->price;
         }
-        return view('cart', compact('carts', 'totalPrice'));
+        $availablePayments = MerchantPayment::where('merchant_id', Auth::user()->id)->get();
+        return view('cart', compact('carts', 'totalPrice', 'availablePayments'));
     }
 
     public function store(Request $request)
@@ -40,7 +43,7 @@ class OrderItemController extends Controller
         ]);
 
         if ($validated) {
-
+            $merchant_id = Product::find($request->product_id)->merchant->id;
             $availableBefore = OrderItem::where('product_id', $request->product_id)->where('is_in_cart', 1)->where('user_id', $uid)->first();
             if ($availableBefore !== null) {
                 $availableBefore->update([
@@ -50,6 +53,7 @@ class OrderItemController extends Controller
                 OrderItem::create([
                     'user_id' => $uid,
                     'product_id' => $request->product_id,
+                    'merchant_id' => $merchant_id,
                     'quantity' => $request->quantity,
                 ]);
             }

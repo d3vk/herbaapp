@@ -19,8 +19,8 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->text('address');
             $table->unsignedBigInteger('merchant_id');
-            $table->enum('status', ['Pesanan dilanjutkan ke penjual', 'Sedang diproses', 'Sedang dikirim', 'Selesai'])->nullable();
-            $table->unsignedBigInteger('payment_method');
+            $table->enum('status', ['Menunggu pembayaran','Pesanan dilanjutkan ke penjual', 'Sedang diproses', 'Sedang dikirim', 'Selesai'])->default('Menunggu pembayaran');
+            $table->unsignedBigInteger('payment_method')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
