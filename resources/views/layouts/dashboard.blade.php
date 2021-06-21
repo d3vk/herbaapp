@@ -230,6 +230,17 @@
                     </li>
                     </li>
                     <!-- End Payment Method -->
+
+                    <!-- Order -->
+                    <li class="side-nav-menu-item {{ request()->is('orders/*') ? 'active' : '' }}">
+                        <a class="side-nav-menu-link media align-items-center" href="{{ route('orders') }}">
+                            <span class="side-nav-menu-icon d-flex mr-3">
+                                <i class="gd-list"></i>
+                            </span>
+                            <span class="side-nav-fadeout-on-closed media-body">Pesanan</span>
+                        </a>
+                    </li>
+                    <!-- End of Order -->
                 @endif
 
                 {{-- End of Toko saya --}}

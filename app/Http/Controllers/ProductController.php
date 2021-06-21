@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Merchant;
+use App\Models\MerchantPayment;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,7 +29,13 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view('product.create');
+        $merchant_id = Merchant::where('admin_id', Auth::user()->id)->pluck('id');
+        $payment = MerchantPayment::where('merchant_id', $merchant_id)->get();
+        // dd($payment->count());
+        if ($payment->count() < 1) {
+            return redirect()->route('home')->with('error', 'Tambahkan metode pembayaran terlebih dahulu.');
+        }
+        // return view('product.create');
     }
 
     public function store(Request $request)

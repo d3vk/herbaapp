@@ -9,6 +9,7 @@ use App\Models\OrderItem;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class OrderController extends Controller
 {
@@ -111,7 +112,41 @@ class OrderController extends Controller
 
     public function transactions()
     {
-        $transactions = Order::whereNotNull('payment_method')->get();
+        $transactions = Order::where('user_id', Auth::user()->id)->whereNotNull('payment_method')->get();
         return view('transaction.list', compact('transactions'));
+    }
+
+    public function orders()
+    {
+        $mid = Merchant::where('admin_id', Auth::user()->id)->pluck('id');
+        $orders = Order::where('merchant_id',$mid)->whereNotNull('payment_method')->paginate(10);
+        return view('transaction.orders', compact('orders'));
+    }
+
+    public function detail($id)
+    {
+        $order = Order::find($id);
+        return view('transaction.orderDetail', compact('order'));
+    }
+
+    public function edit($id)
+    {
+        $order = Order::find($id);
+        return view('transaction.editOrder', compact('order'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'status' => ['required', Rule::in(['Pesanan dilanjutkan ke penjual','Sedang diproses','Sedang dikirim'])],
+        ]);
+
+        if ($validated) {
+            Order::find($id)->update([
+                'status' => $request->status,
+            ]);
+        }
+
+        return redirect()->route('orders')->with('success', 'Berhasil mengubah status pesanan');
     }
 }

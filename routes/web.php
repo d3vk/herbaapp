@@ -10,6 +10,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Models\Merchant;
 use App\Models\MerchantPayment;
+use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\User;
@@ -45,11 +46,8 @@ Route::get('/debug', function () {
     // $data['merchant'] = $data['orders']->unique('merchant_id')->pluck('merchant_id');
     // $data['merchant_1'] = $data['orders']->where('merchant_id', $data['merchant'][0]);
     // dd($data);
-    $cart = OrderItem::first();
-    $cart->update([
-        'order_invoice' => '123123123',
-    ]);
-    dd($cart);
+    $order = Order::first();
+    dd($order->payment[0]->method);
 });
 
 Auth::routes();
@@ -97,6 +95,13 @@ Route::get('/menunggu-pembayaran', [OrderController::class, 'waitingPayment'])->
 Route::get('/choose-payment/{id}', [OrderController::class, 'choosePayment'])->name('choosePayment');
 Route::put('/pay/{oid}/{pid}', [OrderController::class, 'pay'])->name('transaction.pay');
 Route::get('/transactions', [OrderController::class, 'transactions'])->name('transaction.list');
+Route::prefix('orders')->group(function () {
+    Route::get('/', [OrderController::class, 'orders'])->name('orders');
+    Route::get('/detail/{id}', [OrderController::class, 'detail'])->name('orders.detail');
+    Route::get('/edit/{id}', [OrderController::class, 'edit'])->name('orders.edit');
+    Route::put('/update/{id}', [OrderController::class, 'update'])->name('orders.update');
+
+});
 
 
 Route::prefix('product')->group(function () {
