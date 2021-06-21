@@ -49,7 +49,6 @@
                             </div>
                         </td>
                     </tr>
-
                     @php
                         $num++;
                     @endphp

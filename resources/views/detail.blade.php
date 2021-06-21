@@ -143,7 +143,6 @@
                         </ul>
                     </div>
                     <div class="card-body">
-
                         <div class="tab-content mt-3">
                             <div class="tab-pane active" id="description" role="tabpanel">
                                 <p class="card-text text-justify">{{ $product->description }}</p>

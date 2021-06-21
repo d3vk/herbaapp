@@ -165,10 +165,10 @@
 
                     <ul id="subBuying" class="side-nav-menu side-nav-menu-second-level mb-0">
                         <li class="side-nav-menu-item">
-                            <a class="side-nav-menu-link" href="#">Menunggu Pembayaran</a>
+                            <a class="side-nav-menu-link" href="{{ route('waitingPayment') }}">Menunggu Pembayaran</a>
                         </li>
                         <li class="side-nav-menu-item">
-                            <a class="side-nav-menu-link" href="#">Daftar Transaksi</a>
+                            <a class="side-nav-menu-link" href="{{ route('transaction.list') }}">Daftar Transaksi</a>
                         </li>
                     </ul>
 
@@ -395,7 +395,6 @@
         </div>
         @yield('modal')
     </main>
-
     <script src="{{ asset('js/graindashboard.js') }}"></script>
     <script src="{{ asset('js/graindashboard.vendor.js') }}"></script>
 </body>

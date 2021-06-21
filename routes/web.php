@@ -93,7 +93,10 @@ Route::post('/add-to-cart', [OrderItemController::class, 'store'])->name('addToC
 Route::delete('/delete-item/{id}', [OrderItemController::class, 'destroy'])->name('deleteFromCart');
 Route::get('/cart', [OrderItemController::class, 'index'])->name('cart');
 Route::post('/checkout', [OrderController::class, 'store'])->name('checkout');
-Route::get('/choose-payment', [OrderItemController::class, 'choosePayment'])->name('choosePayment');
+Route::get('/menunggu-pembayaran', [OrderController::class, 'waitingPayment'])->name('waitingPayment');
+Route::get('/choose-payment/{id}', [OrderController::class, 'choosePayment'])->name('choosePayment');
+Route::put('/pay/{oid}/{pid}', [OrderController::class, 'pay'])->name('transaction.pay');
+Route::get('/transactions', [OrderController::class, 'transactions'])->name('transaction.list');
 
 
 Route::prefix('product')->group(function () {

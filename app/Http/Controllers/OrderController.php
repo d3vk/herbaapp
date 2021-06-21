@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Merchant;
+use App\Models\MerchantPayment;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -77,5 +80,38 @@ class OrderController extends Controller
         // } else {
         //     return redirect()->route('admin.users.create')->with('error', 'Gagal membuat pengguna baru')->withInput($request->except('password'));
         // }
+    }
+
+    public function waitingPayment()
+    {
+        $orders = Order::where('user_id', Auth::user()->id)->where('payment_method', null)->get();
+        return view('transaction.waiting', compact('orders'));
+    }
+
+    public function choosePayment($id)
+    {
+        $order = Order::find($id);
+        $merchant = Merchant::find($order->merchant_id);
+        $payments = $merchant->paymentMethod;
+        $merchantAccount = MerchantPayment::where('merchant_id', $order->merchant_id)->get();
+        return view('transaction.choose-method', compact('order', 'payments', 'merchantAccount'));
+        // dd($merchantAccount[0]->account);
+    }
+
+    public function pay($oid, $pid)
+    {
+        Order::find($oid)->update([
+            'payment_method' => $pid,
+            'status' => 'Pesanan dilanjutkan ke penjual'
+        ]);
+        // $data['payment'] = MerchantPayment::find($pid);
+        // dd($data);
+        return redirect()->route('waitingPayment')->with('success', 'Berhasil memilih metode pembayaran. Hubungi penjual untuk mengkonfirmasi pembayaran Anda.');
+    }
+
+    public function transactions()
+    {
+        $transactions = Order::whereNotNull('payment_method')->get();
+        return view('transaction.list', compact('transactions'));
     }
 }
