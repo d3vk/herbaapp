@@ -151,7 +151,7 @@
                 <!-- End Cart -->
 
                 <!-- Pembelian -->
-                <li class="side-nav-menu-item side-nav-has-menu {{ request()->is('order*') ? 'active' : '' }}">
+                <li class="side-nav-menu-item side-nav-has-menu {{ request()->is('purchase/*') ? 'active' : '' }}">
                     <a class="side-nav-menu-link media align-items-center" href="#" data-target="#subBuying">
                         <span class="side-nav-menu-icon d-flex mr-3">
                             <i class="gd-receipt"></i>

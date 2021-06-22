@@ -113,6 +113,9 @@ class OrderController extends Controller
     public function transactions()
     {
         $transactions = Order::where('user_id', Auth::user()->id)->whereNotNull('payment_method')->get();
+        if ($transactions->count() < 1) {
+            return redirect()->route('waitingPayment')->with('error', 'Anda belum memiliki transaksi yang sudah diselesaikan. Silahkan pilih metode pembayaran pada daftar tunggu Anda.');
+        }
         return view('transaction.list', compact('transactions'));
     }
 

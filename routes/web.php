@@ -91,10 +91,10 @@ Route::post('/add-to-cart', [OrderItemController::class, 'store'])->name('addToC
 Route::delete('/delete-item/{id}', [OrderItemController::class, 'destroy'])->name('deleteFromCart');
 Route::get('/cart', [OrderItemController::class, 'index'])->name('cart');
 Route::post('/checkout', [OrderController::class, 'store'])->name('checkout');
-Route::get('/menunggu-pembayaran', [OrderController::class, 'waitingPayment'])->name('waitingPayment');
-Route::get('/choose-payment/{id}', [OrderController::class, 'choosePayment'])->name('choosePayment');
-Route::put('/pay/{oid}/{pid}', [OrderController::class, 'pay'])->name('transaction.pay');
-Route::get('/transactions', [OrderController::class, 'transactions'])->name('transaction.list');
+Route::get('/purchase/waiting', [OrderController::class, 'waitingPayment'])->name('waitingPayment');
+Route::get('/purchase/choose-payment/{id}', [OrderController::class, 'choosePayment'])->name('choosePayment');
+Route::put('/purchase/pay/{oid}/{pid}', [OrderController::class, 'pay'])->name('transaction.pay');
+Route::get('/purchase/transactions', [OrderController::class, 'transactions'])->name('transaction.list');
 Route::prefix('orders')->group(function () {
     Route::get('/', [OrderController::class, 'orders'])->name('orders');
     Route::get('/detail/{id}', [OrderController::class, 'detail'])->name('orders.detail');
