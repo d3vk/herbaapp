@@ -50,7 +50,7 @@
                             @endforeach
                             <tr>
                                 <td></td>
-                                <td><a href="https://api.whatsapp.com/send?phone={{ preg_replace('/^0/','62',$order->merchant->phone) }}" target="_blank" class="btn btn-sm btn-soft-danger">Tanya penjual</a></td>
+                                <td><a href="https://api.whatsapp.com/send?phone={{ preg_replace('/^0/','62',$order->merchant->phone) }}" target="_blank" class="btn btn-sm btn-soft-primary">Konfirmasi pembayaran</a></td>
                                 <td></td>
 
                                 <td><button class="btn btn-sm btn-soft-success" data-toggle="modal"

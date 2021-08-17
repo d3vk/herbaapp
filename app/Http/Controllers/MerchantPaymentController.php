@@ -27,7 +27,7 @@ class MerchantPaymentController extends Controller
     public function index()
     {
         $methods = Payment::all();
-        $availablePayments = MerchantPayment::where('merchant_id', Auth::user()->id)->paginate(10);
+        $availablePayments = MerchantPayment::where('merchant_id', Auth::user()->merchant->id)->paginate(10);
         return view('merchant.payment', compact('methods', 'availablePayments'));
     }
 
@@ -54,11 +54,11 @@ class MerchantPaymentController extends Controller
             'account' => ['required'],
         ]);
 
-        $uid = Auth::user()->id;
+        $merchant_id = Auth::user()->merchant->id;
 
         if ($validated) {
             MerchantPayment::create([
-                'merchant_id' => $uid,
+                'merchant_id' => $merchant_id,
                 'method_id' => $request->method_id,
                 'account' => $request->account,
             ]);

@@ -9,7 +9,7 @@
                 @method('put')
                 @csrf
                 <div class="form-group">
-                    <label for="invoice">Nama</label>
+                    <label for="invoice">Invoice</label>
                     <input id="invoice" type="text" class="form-control" name="invoice" value="{{ $order->invoice }}" required
                         autocomplete="invoice" autofocus disabled>
                 </div>
@@ -21,7 +21,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="address">Alamat Pelanggan</label>
+                    <label for="address">Alamat Pengiriman</label>
                     <input id="address" type="text" class="form-control" name="address" value="{{ $order->address }}" required
                         autocomplete="address" autofocus disabled>
                 </div>

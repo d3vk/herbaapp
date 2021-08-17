@@ -16,13 +16,7 @@ class MerchantSeeder extends Seeder
     {
         $merchants = [
             [
-                'name' => 'Tokonya Admin',
-                'admin_id' => 1,
-                'address' => 'Jl. Ir. Sutami 36A Surakarta',
-                'phone' => '081111111111',
-            ],
-            [
-                'name' => 'Toko Pak Langgeng',
+                'name' => 'PJ Ching Lung',
                 'admin_id' => 2,
                 'address' => 'Jl. Ir. Sutami 38A Surakarta',
                 'phone' => '082222222222',

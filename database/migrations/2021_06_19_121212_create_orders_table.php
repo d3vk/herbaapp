@@ -25,7 +25,7 @@ class CreateOrdersTable extends Migration
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('merchant_id')->references('id')->on('merchants');
-            $table->foreign('payment_method')->references('id')->on('payments');
+            $table->foreign('payment_method')->references('id')->on('merchant_payments');
         });
     }
 

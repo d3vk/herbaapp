@@ -35,7 +35,7 @@ class ProductController extends Controller
         if ($payment->count() < 1) {
             return redirect()->route('home')->with('error', 'Tambahkan metode pembayaran terlebih dahulu.');
         }
-        // return view('product.create');
+        return view('product.create');
     }
 
     public function store(Request $request)

@@ -44,7 +44,7 @@
                             @endphp
                             <img class="card-img-top" src="{{ asset('images/' . $first_img) }}"
                                 alt="{{ $product->name }}"
-                                style="border-top-left-radius: inherit;border-top-right-radius: inherit;">
+                                style="border-top-left-radius: inherit;border-top-right-radius: inherit; height: 230px; object-fit: cover;">
                             <div class=" card-body">{{ $product->name }}<br><strong>Rp
                                     {{ number_format("$product->price", 0, ',', '.') }}</strong></div>
                             {{-- <div class="card-footer"
