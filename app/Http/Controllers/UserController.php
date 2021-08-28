@@ -57,7 +57,8 @@ class UserController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => bcrypt($request->password),
-                'is_admin' => $request->is_admin
+                'is_admin' => $request->is_admin,
+                'is_penyedia_jasa' => $request->is_penyedia_jasa
             ]);
             return redirect()->route('admin.users.create')->with('success', 'Pengguna baru berhasil dibuat');
         } else {

@@ -40,6 +40,12 @@ class UserSeeder extends Seeder
                 'name' => 'Dinda Andriani',
                 'email' => 'dinda@herba.app',
                 'password' => bcrypt('123'),
+            ],
+            [
+                'name' => 'Olivia Andriani',
+                'email' => 'olivia@herba.app',
+                'is_penyedia_jasa' => true,
+                'password' => bcrypt('123'),
             ]
         ];
 

@@ -33,11 +33,20 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="is_admin">Role
+                    <label for="is_admin">Jenis Pengguna
                     </label>
                         <select name="is_admin" id="is_admin" class="form-control">
                             <option value="0">User</option>
                             <option value="1">Administrator</option>
+                        </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="is_penyedia_jasa">Pengguna Maklon
+                    </label>
+                        <select name="is_penyedia_jasa" id="is_penyedia_jasa" class="form-control">
+                            <option value="0">User</option>
+                            <option value="1">Penyedia Jasa</option>
                         </select>
                 </div>
         

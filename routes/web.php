@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MerchantController;
 use App\Http\Controllers\MerchantPaymentController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderItemController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\StorageFileController;
 use App\Http\Controllers\UserController;
 use App\Models\Merchant;
 use App\Models\MerchantPayment;
@@ -51,6 +53,8 @@ Route::get('/debug', function () {
 });
 
 Auth::routes();
+
+Route::get('/avatar/{filename}', [StorageFileController::class, 'getAvatar'])->name('display.avatar');
 
 Route::middleware(['isAdmin'])->group(function () {
     Route::prefix('admin')->group(function () {
@@ -119,4 +123,13 @@ Route::prefix('payment')->group(function () {
     Route::get('/edit/{id}', [MerchantPaymentController::class, 'edit'])->name('payment.edit');
     Route::put('/edit/{id}', [MerchantPaymentController::class, 'update'])->name('payment.update');
     Route::delete('/delete/{id}', [MerchantPaymentController::class, 'destroy'])->name('payment.delete');
+});
+
+Route::prefix('company')->group(function () {
+    Route::get('/', [CompanyController::class, 'index'])->name('company.index');
+    Route::post('/create', [CompanyController::class, 'store'])->name('company.store');
+    Route::get('/edit/{id}', [CompanyController::class, 'edit'])->name('company.edit');
+    Route::put('/edit/{id}', [CompanyController::class, 'update'])->name('company.update');
+    Route::delete('/delete/{id}', [CompanyController::class, 'destroy'])->name('company.delete');
+    Route::get('/order', [CompanyController::class, 'order'])->name('company.order');
 });
