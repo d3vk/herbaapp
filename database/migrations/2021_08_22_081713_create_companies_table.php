@@ -17,7 +17,6 @@ class CreateCompaniesTable extends Migration
             $table->unsignedBigInteger('id');
             $table->string('name')->unique();
             $table->string('profile');
-            $table->string('logo')->default('company.png');
             $table->string('phone');
             $table->string('address');
             $table->timestamps();
