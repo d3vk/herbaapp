@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MaklonJobController;
 use App\Http\Controllers\MerchantController;
 use App\Http\Controllers\MerchantPaymentController;
 use App\Http\Controllers\OrderController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StorageFileController;
 use App\Http\Controllers\UserController;
+use App\Models\Company;
 use App\Models\Merchant;
 use App\Models\MerchantPayment;
 use App\Models\Order;
@@ -104,8 +106,12 @@ Route::prefix('orders')->group(function () {
     Route::get('/detail/{id}', [OrderController::class, 'detail'])->name('orders.detail');
     Route::get('/edit/{id}', [OrderController::class, 'edit'])->name('orders.edit');
     Route::put('/update/{id}', [OrderController::class, 'update'])->name('orders.update');
-
 });
+
+Route::get('/penyedia-jasa', [CompanyController::class, 'list'])->name('company.list');
+Route::get('/penyedia-jasa/{id}', [CompanyController::class, 'show'])->name('company.detail');
+Route::post('/hire', [MaklonJobController::class, 'store'])->name('maklon.order');
+Route::get('/pesanan-saya', [MaklonJobController::class, 'list'])->name('maklon.myorder');
 
 
 Route::prefix('product')->group(function () {
@@ -132,4 +138,5 @@ Route::prefix('company')->group(function () {
     Route::put('/edit/{id}', [CompanyController::class, 'update'])->name('company.update');
     Route::delete('/delete/{id}', [CompanyController::class, 'destroy'])->name('company.delete');
     Route::get('/order', [CompanyController::class, 'order'])->name('company.order');
+    Route::put('/update-order/{id}', [CompanyController::class, 'updateOrder'])->name('update.order');
 });

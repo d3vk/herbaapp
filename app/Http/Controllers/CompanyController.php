@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\MaklonJob;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,10 +17,12 @@ class CompanyController extends Controller
     public function index()
     {
         $company = Company::where('id', Auth::user()->id)->first();
+        $done = MaklonJob::where('worker_id', Auth::user()->id)->where('status','Selesai')->count();
+        $process = MaklonJob::where('worker_id', Auth::user()->id)->where('status','Dalam Proses')->count();
         if (!$company) {
             return view('company.empty');
         } else {
-            return view('company.index', compact('company'));
+            return view('company.index', compact('company', 'done', 'process'));
         }
         
     }
@@ -43,7 +46,6 @@ class CompanyController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255', 'unique:companies'],
             'profile' => ['required', 'string'],
             'address' => ['required', 'string'],
             'phone' => ['required', 'string'],
@@ -52,7 +54,7 @@ class CompanyController extends Controller
         if ($validated) {
             Company::create([
                 'id' => Auth::user()->id,
-                'name' => $request->name,
+                'name' => Auth::user()->name,
                 'profile' => $request->profile,
                 'address' => $request->address,
                 'phone' => $request->phone,
@@ -69,9 +71,10 @@ class CompanyController extends Controller
      * @param  \App\Models\company  $company
      * @return \Illuminate\Http\Response
      */
-    public function show(company $company)
+    public function show($id)
     {
-        //
+        $company = Company::find($id);
+        return view('showCompany', compact('company'));
     }
 
     /**
@@ -106,5 +109,26 @@ class CompanyController extends Controller
     public function destroy(company $company)
     {
         //
+    }
+
+    public function order()
+    {
+        $orders = MaklonJob::where('worker_id', Auth::user()->id)->get();
+        return view('company.order', compact('orders'));
+    }
+
+    public function list()
+    {
+        $companies = Company::all();
+        return view('listCompany', compact('companies'));
+    }
+
+    public function updateOrder(Request $request, $id)
+    {
+        $order = MaklonJob::find($id);
+        $order->update([
+            'status' => $request->status
+        ]);
+        return redirect()->route('company.order')->with('success', 'Berhasil mengubah status');
     }
 }

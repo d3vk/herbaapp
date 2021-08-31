@@ -20,6 +20,9 @@ class CreateMaklonJobsTable extends Migration
             $table->enum('status', ['Dalam Proses', 'Selesai']);
             $table->longText('keterangan');
             $table->timestamps();
+
+            $table->foreign('client_id')->references('id')->on('users');
+            $table->foreign('worker_id')->references('id')->on('companies');
         });
     }
 

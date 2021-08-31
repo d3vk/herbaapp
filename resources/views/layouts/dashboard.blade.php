@@ -13,7 +13,7 @@
 
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}">
 
@@ -180,7 +180,7 @@
                     <!-- Title -->
                     <li class="sidebar-heading h6">Company saya</li>
                     <!-- End Title -->
-                    <li class="side-nav-menu-item {{ request()->is('company*') ? 'active' : '' }}">
+                    <li class="side-nav-menu-item {{ request()->is('company') ? 'active' : '' }}">
                         <a class="side-nav-menu-link media align-items-center" href="{{ route('company.index') }}">
                             <span class="side-nav-menu-icon d-flex mr-3">
                                 <i class="gd-briefcase"></i>
@@ -196,81 +196,48 @@
                             <span class="side-nav-fadeout-on-closed media-body">Chat</span>
                         </a>
                     </li>
+                    <li class="side-nav-menu-item {{ request()->is('company/order*') ? 'active' : '' }}">
+                        <a class="side-nav-menu-link media align-items-center" href="{{ route('company.order') }}">
+                            <span class="side-nav-menu-icon d-flex mr-3">
+                                <i class="gd-bookmark-alt"></i>
+                            </span>
+                            <span class="side-nav-fadeout-on-closed media-body">Pekerjaan</span>
+                        </a>
+                    </li>
                     {{-- End of Company saya --}}
                 @else
-                    {{-- Toko saya --}}
+
+                    {{-- Maklon --}}
                     <!-- Title -->
-                    <li class="sidebar-heading h6">Toko saya</li>
+                    <li class="sidebar-heading h6">Maklon</li>
                     <!-- End Title -->
+                    <li class="side-nav-menu-item {{ request()->is('penyedia-jasa*') ? 'active' : '' }}">
+                        <a class="side-nav-menu-link media align-items-center" href="{{ route('company.list') }}">
+                            <span class="side-nav-menu-icon d-flex mr-3">
+                                <i class="gd-bookmark-alt"></i>
+                            </span>
+                            <span class="side-nav-fadeout-on-closed media-body">Penyedia Jasa</span>
+                        </a>
+                    </li>
+                    <li class="side-nav-menu-item {{ request()->is('pesanan-saya*') ? 'active' : '' }}">
+                        <a class="side-nav-menu-link media align-items-center" href="{{ route('maklon.myorder') }}">
+                            <span class="side-nav-menu-icon d-flex mr-3">
+                                <i class="gd-bookmark"></i>
+                            </span>
+                            <span class="side-nav-fadeout-on-closed media-body">Pesanan Saya</span>
+                        </a>
+                    </li>
+                    <li class="side-nav-menu-item {{ request()->is('messages*') ? 'active' : '' }}">
+                        <a class="side-nav-menu-link media align-items-center" href="{{ route('messages') }}">
+                            <span class="side-nav-menu-icon d-flex mr-3">
+                                <i class="gd-comment"></i>
+                            </span>
+                            <span class="side-nav-fadeout-on-closed media-body">Chat</span>
+                        </a>
+                    </li>
+                    
+                    {{-- End of Maklon --}}
 
-                    @php
-                        $merchant = App\Models\Merchant::where('admin_id', Auth::user()->id)->first();
-                    @endphp
-
-                    @if ($merchant == null)
-                        <li class="side-nav-menu-item {{ request()->is('create-store*') ? 'active' : '' }}">
-                            <a class="side-nav-menu-link media align-items-center"
-                                href="{{ route('create.market') }}">
-                                <span class="side-nav-menu-icon d-flex mr-3">
-                                    <i class="gd-plus"></i>
-                                </span>
-                                <span class="side-nav-fadeout-on-closed media-body">Buka Toko</span>
-                            </a>
-                        </li>
-                    @else
-                        <!-- Produk -->
-                        <li
-                            class="side-nav-menu-item side-nav-has-menu {{ request()->is('store*') ? 'active' : '' }}">
-                            <a class="side-nav-menu-link media align-items-center" href="#" data-target="#subProduct">
-                                <span class="side-nav-menu-icon d-flex mr-3">
-                                    <i class="gd-package"></i>
-                                </span>
-                                <span class="side-nav-fadeout-on-closed media-body">Produk</span>
-                                <span class="side-nav-control-icon d-flex">
-                                    <i class="gd-angle-right side-nav-fadeout-on-closed"></i>
-                                </span>
-                                <span class="side-nav__indicator side-nav-fadeout-on-closed"></span>
-                            </a>
-
-                            <ul id="subProduct" class="side-nav-menu side-nav-menu-second-level mb-0">
-                                <li class="side-nav-menu-item">
-                                    <a class="side-nav-menu-link" href="{{ route('product.create') }}">Tambah
-                                        Produk</a>
-                                </li>
-                                <li class="side-nav-menu-item">
-                                    <a class="side-nav-menu-link" href="{{ route('product.index') }}">Daftar
-                                        Produk</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <!-- End of Produk -->
-
-                        <!-- Payment Method -->
-                        <li class="side-nav-menu-item {{ request()->is('payment/*') ? 'active' : '' }}">
-                            <a class="side-nav-menu-link media align-items-center"
-                                href="{{ route('payment.index') }}">
-                                <span class="side-nav-menu-icon d-flex mr-3">
-                                    <i class="gd-money"></i>
-                                </span>
-                                <span class="side-nav-fadeout-on-closed media-body">Pembayaran</span>
-                            </a>
-                        </li>
-                        </li>
-                        <!-- End Payment Method -->
-
-                        <!-- Order -->
-                        <li class="side-nav-menu-item {{ request()->is('orders/*') ? 'active' : '' }}">
-                            <a class="side-nav-menu-link media align-items-center" href="{{ route('orders') }}">
-                                <span class="side-nav-menu-icon d-flex mr-3">
-                                    <i class="gd-list"></i>
-                                </span>
-                                <span class="side-nav-fadeout-on-closed media-body">Pesanan</span>
-                            </a>
-                        </li>
-                        <!-- End of Order -->
-                    @endif
-
-                    {{-- End of Toko saya --}}
                 @endif
 
                 @if (Auth::user()->is_admin == 1)

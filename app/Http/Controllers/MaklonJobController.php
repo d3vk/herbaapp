@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\maklon_job;
+use App\Models\MaklonJob;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MaklonJobController extends Controller
 {
@@ -35,7 +36,22 @@ class MaklonJobController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'keterangan' => ['required'],
+        ]);
+
+        if ($validated) {
+            MaklonJob::create([
+                'client_id' => Auth::user()->id,
+                'worker_id' => $request->worker_id,
+                'status' => "Dalam Proses",
+                'keterangan' => $request->keterangan,
+            ]);
+            return redirect()->route('maklon.myorder')->with('success', 'Berhasil menyewa pekerja');
+        } else {
+            return redirect()->route('maklon.myorder')->with('error', 'Gagal menyewa pekerja');
+
+        }
     }
 
     /**
@@ -44,7 +60,7 @@ class MaklonJobController extends Controller
      * @param  \App\Models\maklon_job  $maklon_job
      * @return \Illuminate\Http\Response
      */
-    public function show(maklon_job $maklon_job)
+    public function show(MaklonJob $maklon_job)
     {
         //
     }
@@ -55,7 +71,7 @@ class MaklonJobController extends Controller
      * @param  \App\Models\maklon_job  $maklon_job
      * @return \Illuminate\Http\Response
      */
-    public function edit(maklon_job $maklon_job)
+    public function edit(MaklonJob $maklon_job)
     {
         //
     }
@@ -67,7 +83,7 @@ class MaklonJobController extends Controller
      * @param  \App\Models\maklon_job  $maklon_job
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, maklon_job $maklon_job)
+    public function update(Request $request, MaklonJob $maklon_job)
     {
         //
     }
@@ -78,8 +94,14 @@ class MaklonJobController extends Controller
      * @param  \App\Models\maklon_job  $maklon_job
      * @return \Illuminate\Http\Response
      */
-    public function destroy(maklon_job $maklon_job)
+    public function destroy(MaklonJob $maklon_job)
     {
         //
+    }
+
+    public function list()
+    {
+        $orders = MaklonJob::where('client_id', Auth::user()->id)->get();
+        return view('myOrder', compact('orders'));
     }
 }
