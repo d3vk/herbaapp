@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Order as NotifyMail;
 use App\Models\Merchant;
 use App\Models\MerchantPayment;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Payment;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
 
 class OrderController extends Controller
@@ -50,6 +53,9 @@ class OrderController extends Controller
 
         if ($validated) {
             for ($i = 0; $i < $mids->count(); $i++) {
+                $merchant = Merchant::find($mids[$i]);
+                $merchantMail = $merchant->user->email;
+                $merchantName = $merchant->user->name;
                 $invoice = 'INV/' . date('Ymd') . '/' . generate_string($permitted_chars, 7) . '/' . $mids[$i];
                 Order::create([
                     'invoice' => $invoice,
@@ -64,6 +70,18 @@ class OrderController extends Controller
                         'is_in_cart' => 0,
                     ]);
                 }
+
+                $details = [
+                    'subject' => 'Pesanan Baru ' . $invoice,
+                    'invoice' => $invoice,
+                    'carts' => $carts,
+                    'merchant' => $merchantName,
+                    'buyer' => Auth::user()->name,
+                    'time' => Carbon::now(),
+                    'address' => $request->address
+                ];
+    
+                Mail::to($merchantMail)->send(new NotifyMail($details));
             }
             return redirect()->route('cart');
         } else {

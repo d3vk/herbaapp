@@ -34,7 +34,6 @@ class PaymentController extends Controller
         $validated = $request->validate([
             'payment_name' => ['required'],
             'payment_method_img' => ['required'],
-            'payment_instruction' => ['required'],
         ]);
 
         $payment_img = $request->file('payment_method_img');

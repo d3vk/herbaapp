@@ -95,7 +95,8 @@
                                     </span>
                                     Sign Out
                                 </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    class="d-none">
                                     @csrf
                                 </form>
                             </li>
@@ -206,7 +207,6 @@
                     </li>
                     {{-- End of Company saya --}}
                 @else
-
                     {{-- Maklon --}}
                     <!-- Title -->
                     <li class="sidebar-heading h6">Maklon</li>
@@ -235,9 +235,70 @@
                             <span class="side-nav-fadeout-on-closed media-body">Chat</span>
                         </a>
                     </li>
-                    
-                    {{-- End of Maklon --}}
 
+                    {{-- End of Maklon --}}
+                @endif
+
+                @php
+                    $merchant = App\Models\Merchant::where('admin_id', Auth::user()->id)->first();
+                @endphp
+
+                @if ($merchant != null)
+                    {{-- Toko saya --}}
+                    <!-- Title -->
+                    <li class="sidebar-heading h6">Toko saya</li>
+                    <!-- End Title -->
+
+                    <!-- Produk -->
+                    <li class="side-nav-menu-item side-nav-has-menu {{ request()->is('store*') ? 'active' : '' }}">
+                        <a class="side-nav-menu-link media align-items-center" href="#" data-target="#subProduct">
+                            <span class="side-nav-menu-icon d-flex mr-3">
+                                <i class="gd-package"></i>
+                            </span>
+                            <span class="side-nav-fadeout-on-closed media-body">Produk</span>
+                            <span class="side-nav-control-icon d-flex">
+                                <i class="gd-angle-right side-nav-fadeout-on-closed"></i>
+                            </span>
+                            <span class="side-nav__indicator side-nav-fadeout-on-closed"></span>
+                        </a>
+
+                        <ul id="subProduct" class="side-nav-menu side-nav-menu-second-level mb-0">
+                            <li class="side-nav-menu-item">
+                                <a class="side-nav-menu-link" href="{{ route('product.create') }}">Tambah
+                                    Produk</a>
+                            </li>
+                            <li class="side-nav-menu-item">
+                                <a class="side-nav-menu-link" href="{{ route('product.index') }}">Daftar
+                                    Produk</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- End of Produk -->
+
+                    <!-- Payment Method -->
+                    <li class="side-nav-menu-item {{ request()->is('payment/*') ? 'active' : '' }}">
+                        <a class="side-nav-menu-link media align-items-center" href="{{ route('payment.index') }}">
+                            <span class="side-nav-menu-icon d-flex mr-3">
+                                <i class="gd-money"></i>
+                            </span>
+                            <span class="side-nav-fadeout-on-closed media-body">Pembayaran</span>
+                        </a>
+                    </li>
+                    </li>
+                    <!-- End Payment Method -->
+
+                    <!-- Order -->
+                    <li class="side-nav-menu-item {{ request()->is('orders/*') ? 'active' : '' }}">
+                        <a class="side-nav-menu-link media align-items-center" href="{{ route('orders') }}">
+                            <span class="side-nav-menu-icon d-flex mr-3">
+                                <i class="gd-list"></i>
+                            </span>
+                            <span class="side-nav-fadeout-on-closed media-body">Pesanan</span>
+                        </a>
+                    </li>
+                    <!-- End of Order -->
+
+                    {{-- End of Toko saya --}}
                 @endif
 
                 @if (Auth::user()->is_admin == 1)
@@ -372,11 +433,13 @@
                 <div class="row justify-content-between">
                     <div class="col-lg text-center text-lg-left mb-3 mb-lg-0">
                         <ul class="list-dot list-inline mb-0">
-                            <li class="list-dot-item list-dot-item-not list-inline-item mr-lg-2"><a class="link-dark"
-                                    href="#">FAQ</a></li>
-                            <li class="list-dot-item list-inline-item mr-lg-2"><a class="link-dark" href="#">Support</a>
+                            <li class="list-dot-item list-dot-item-not list-inline-item mr-lg-2"><a
+                                    class="link-dark" href="#">FAQ</a></li>
+                            <li class="list-dot-item list-inline-item mr-lg-2"><a class="link-dark"
+                                    href="#">Support</a>
                             </li>
-                            <li class="list-dot-item list-inline-item mr-lg-2"><a class="link-dark" href="#">Contact
+                            <li class="list-dot-item list-inline-item mr-lg-2"><a class="link-dark"
+                                    href="#">Contact
                                     us</a></li>
                         </ul>
                     </div>

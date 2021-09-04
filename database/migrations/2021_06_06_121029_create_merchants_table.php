@@ -17,7 +17,6 @@ class CreateMerchantsTable extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->unsignedBigInteger('admin_id');
-            $table->string('logo')->nullable();
             $table->string('address');
             $table->string('phone');
             $table->boolean('is_active')->default(1);

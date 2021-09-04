@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Merchant;
+use App\Models\Company;
 use Illuminate\Database\Seeder;
 
-class MerchantSeeder extends Seeder
+class CompanySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,17 +14,18 @@ class MerchantSeeder extends Seeder
      */
     public function run()
     {
-        $merchants = [
+        $companies = [
             [
+                'id' => 2,
                 'name' => 'CV PJ Ching Lung',
-                'admin_id' => 2,
-                'address' => 'Jl. Ir. Sutami 38A Surakarta',
+                'profile' => 'Berdiri sejak 2020',
                 'phone' => '082222222222',
+                'address' => 'Jl. Ir. Sutami 38A Surakarta',
             ],
         ];
 
-        foreach ($merchants as $key => $value) {
-            Merchant::create($value);
+        foreach ($companies as $key => $value) {
+            Company::create($value);
             
         }
     }
