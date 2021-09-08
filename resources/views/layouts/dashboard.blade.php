@@ -20,6 +20,10 @@
     <!-- Template -->
     <link rel="stylesheet" href="{{ asset('css/graindashboard.css') }}">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
     <style>
         body {
             font-family: 'Nunito', sans-serif;
@@ -336,14 +340,31 @@
                     <!-- End Users -->
 
                     <!-- Merchant -->
-                    <li class="side-nav-menu-item {{ request()->is('admin/merchant*') ? 'active' : '' }}">
-                        <a class="side-nav-menu-link media align-items-center"
-                            href="{{ route('admin.merchant.index') }}">
+                    <li
+                        class="side-nav-menu-item side-nav-has-menu {{ request()->is('admin/merchant*') ? 'active' : '' }}">
+                        <a class="side-nav-menu-link media align-items-center" href="#" data-target="#subMerchant">
                             <span class="side-nav-menu-icon d-flex mr-3">
                                 <i class="gd-bag"></i>
                             </span>
                             <span class="side-nav-fadeout-on-closed media-body">Merchant</span>
+                            <span class="side-nav-control-icon d-flex">
+                                <i class="gd-angle-right side-nav-fadeout-on-closed"></i>
+                            </span>
+                            <span class="side-nav__indicator side-nav-fadeout-on-closed"></span>
                         </a>
+
+                        <!-- Users: subUsers -->
+                        <ul id="subMerchant" class="side-nav-menu side-nav-menu-second-level mb-0">
+                            <li class="side-nav-menu-item">
+                                <a class="side-nav-menu-link" href="{{ route('admin.merchant.index') }}">Lihat
+                                    merchant</a>
+                            </li>
+                            <li class="side-nav-menu-item">
+                                <a class="side-nav-menu-link" href="{{ route('admin.merchant.create') }}">Tambah
+                                    merchant</a>
+                            </li>
+                        </ul>
+                        <!-- End Merchant: subMerchant -->
                     </li>
                     <!-- End Merchant -->
 
@@ -466,6 +487,7 @@
     </main>
     <script src="{{ asset('js/graindashboard.js') }}"></script>
     <script src="{{ asset('js/graindashboard.vendor.js') }}"></script>
+    @yield('js')
 </body>
 
 </html>

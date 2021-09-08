@@ -73,6 +73,9 @@ Route::middleware(['isAdmin'])->group(function () {
 
         Route::prefix('merchants')->group(function () {
             Route::get('/', [MerchantController::class, 'index'])->name('admin.merchant.index');
+            Route::get('/create', [MerchantController::class, 'create'])->name('admin.merchant.create');
+            Route::get('/findUser', [MerchantController::class, 'findUser'])->name('admin.finduser');
+            Route::post('/create', [MerchantController::class, 'store'])->name('admin.merchant.store');
             Route::delete('/delete/{id}', [MerchantController::class, 'destroy'])->name('admin.merchant.delete');
         });
 
