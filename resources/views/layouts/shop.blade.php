@@ -47,7 +47,7 @@
                 </div>
                 <div class="col-lg-6">
                     <nav class="header__menu">
-                        <ul>
+                        {{-- <ul>
                             <li class="active"><a href="index-2.html">Home</a></li>
                             <li><a href="shop-grid.html">Shop</a></li>
                             <li><a href="#">Pages</a>
@@ -60,7 +60,7 @@
                             </li>
                             <li><a href="blog.html">Blog</a></li>
                             <li><a href="contact.html">Contact</a></li>
-                        </ul>
+                        </ul> --}}
                     </nav>
                 </div>
                 <div class="col-lg-3">
@@ -152,41 +152,10 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
+                <div class="col-lg-8 col-md-8 col-sm-8 offset-lg-1 mt-5">
                     <div class="footer__widget">
-                        <h6>Useful Links</h6>
-                        <ul>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">About Our Shop</a></li>
-                            <li><a href="#">Secure Shopping</a></li>
-                            <li><a href="#">Delivery infomation</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Our Sitemap</a></li>
-                        </ul>
-                        <ul>
-                            <li><a href="#">Who We Are</a></li>
-                            <li><a href="#">Our Services</a></li>
-                            <li><a href="#">Projects</a></li>
-                            <li><a href="#">Contact</a></li>
-                            <li><a href="#">Innovation</a></li>
-                            <li><a href="#">Testimonials</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12">
-                    <div class="footer__widget">
-                        <h6>Join Our Newsletter Now</h6>
-                        <p>Get E-mail updates about our latest shop and special offers.</p>
-                        <form action="#">
-                            <input type="text" placeholder="Enter your mail">
-                            <button type="submit" class="site-btn">Subscribe</button>
-                        </form>
-                        <div class="footer__widget__social">
-                            <a href="#"><i class="fab fa-facebook"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-pinterest"></i></a>
-                        </div>
+                        <h6>Information</h6>
+                        <p>herbal11 merupakan hasil kerjasama dari UNS dan CV PJ Ching Lung</p>
                     </div>
                 </div>
             </div>

@@ -296,8 +296,9 @@
                                 Tidak tersedia
                             </p>
                     @endswitch
-                    <form action="{{ route('transaction.pay', ['oid' => $order->id, 'pid' => $merchantAccount[$i]->id]) }}"
-                        method="post">
+                    <form
+                        action="{{ route('transaction.pay', ['oid' => $order->id, 'pid' => $merchantAccount[$i]->id]) }}"
+                        method="post" id="payMethod">
                         @method('put')
                         @csrf
                         <button type="submit" class="btn btn-soft-success">Bayar</button>
@@ -307,4 +308,12 @@
         </div>
     </div>
     <!-- End Card -->
+@endsection
+
+@section('js')
+    <script>
+        $('#payMethod').one('submit', function() {
+            $(this).find('input[type="submit"]').attr('disabled', 'disabled');
+        });
+    </script>
 @endsection

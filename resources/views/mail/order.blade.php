@@ -501,7 +501,7 @@
                     <tr>
                         <td class="email-masthead">
                             <a href="#herbaURL" class="f-fallback email-masthead_name">
-                                HerbalSmart
+                                <strong>herbal11</strong>
                             </a>
                         </td>
                     </tr>
@@ -515,7 +515,7 @@
                                     <td class="content-cell">
                                         <div class="f-fallback">
                                             <h1>Hai {{ $details['merchant'] }},</h1>
-                                            <p>Terima kasih telah menggunakan HerbalSmart. Ini merupakan email notifikasi untuk Anda. {{ $details['buyer'] }} telah melakukan checkout di toko Anda. Persiapkan produk yang dipesan, namun jangan lupa menunggu konfirmasi dari {{ $details['buyer'] }}.</p>
+                                            <p>Terima kasih telah menggunakan herbal11. Ini merupakan email notifikasi untuk Anda. {{ $details['buyer'] }} telah melakukan checkout di toko Anda. Persiapkan produk yang dipesan, namun jangan lupa menunggu konfirmasi dari {{ $details['buyer'] }}.</p>
                                             <hr>
                                             <table class="purchase" width="100%" cellpadding="0" cellspacing="0">
                                                 <tr>
@@ -524,6 +524,11 @@
                                                     </td>
                                                     <td>
                                                         <h3 class="align-right">{{ $details['time'] }}</h3>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <h3>Metode: {{ $details['method'] }}</h3>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -565,7 +570,8 @@
                                                             <tr>
                                                                 <td class="attributes_item">
                                                                     <span class="f-fallback">
-                                                                        <strong>Alamat pengiriman:</strong> {{ $details['address'] }}
+                                                                        <strong>Alamat pengiriman:</strong> <br>
+                                                                        {{ $details['address'] }}
                                                                     </span>
                                                                 </td>
                                                             </tr>
@@ -575,7 +581,7 @@
                                             </table>
 
                                             <p>Salam,
-                                                <br>Tim HerbalSmart
+                                                <br>Tim herbal11
                                             </p>
                                             <!-- Sub copy -->
                                         </div>
@@ -590,10 +596,10 @@
                                 role="presentation">
                                 <tr>
                                     <td class="content-cell" align="center">
-                                        <p class="f-fallback sub align-center">&copy; 2021 HerbalSmart. All rights
+                                        <p class="f-fallback sub align-center">&copy; 2021 herbal11. All rights
                                             reserved.</p>
                                         <p class="f-fallback sub align-center">
-                                            HerbalSmart
+                                            herbal11
                                             <br>Jl. Ir. Sutami No.36, Kentingan, Kec. Jebres
                                             <br>Kota Surakarta, Jawa Tengah 57126
                                         </p>

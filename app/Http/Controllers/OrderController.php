@@ -8,6 +8,7 @@ use App\Models\MerchantPayment;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Payment;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -71,17 +72,17 @@ class OrderController extends Controller
                     ]);
                 }
 
-                $details = [
-                    'subject' => 'Pesanan Baru ' . $invoice,
-                    'invoice' => $invoice,
-                    'carts' => $carts,
-                    'merchant' => $merchantName,
-                    'buyer' => Auth::user()->name,
-                    'time' => Carbon::now(),
-                    'address' => $request->address
-                ];
+                // $details = [
+                //     'subject' => 'Pesanan Baru ' . $invoice,
+                //     'invoice' => $invoice,
+                //     'carts' => $carts,
+                //     'merchant' => $merchantName,
+                //     'buyer' => Auth::user()->name,
+                //     'time' => Carbon::now(),
+                //     'address' => $request->address
+                // ];
     
-                Mail::to($merchantMail)->send(new NotifyMail($details));
+                // Mail::to($merchantMail)->send(new NotifyMail($details));
             }
             return redirect()->route('cart');
         } else {
@@ -123,6 +124,30 @@ class OrderController extends Controller
             'payment_method' => $pid,
             'status' => 'Pesanan dilanjutkan ke penjual'
         ]);
+
+        $order = Order::findOrFail($oid);
+        $invoice = $order->invoice;
+        $merchantName = $order->merchant->name;
+        $merchantId = $order->merchant->admin_id;
+        $merchantMail = User::findOrFail($merchantId);
+        $address = $order->address;
+        $buyer = $order->user->name;
+        $methodId = $order->payment[0]->method_id;
+        $account = $order->payment[0]->account;
+        $methodName = Payment::findOrFail($methodId);
+        $carts = OrderItem::where('user_id', Auth::user()->id)->where('order_invoice', $invoice)->get();
+
+        $details = [
+            'subject' => 'Pesanan Baru ' . $invoice,
+            'invoice' => $invoice,
+            'carts' => $carts,
+            'merchant' => $merchantName,
+            'buyer' => $buyer,
+            'time' => Carbon::now(),
+            'address' => $address,
+            'method' => $methodName->payment_name . ' - ' . $account
+        ];
+        Mail::to($merchantMail->email)->send(new NotifyMail($details));
         // $data['payment'] = MerchantPayment::find($pid);
         // dd($data);
         return redirect()->route('waitingPayment')->with('success', 'Berhasil memilih metode pembayaran. Hubungi penjual untuk mengkonfirmasi pembayaran Anda.');

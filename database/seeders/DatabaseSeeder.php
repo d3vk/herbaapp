@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
             MerchantSeeder::class,
             CompanySeeder::class,
             PaymentMethodSeeder::class,
-            // ProductSeeder::class,
+            MerchantPaymentSeeder::class,
+            ProductSeeder::class,
         ]);
     }
 }
